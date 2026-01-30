@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: 'Mice';
+    src: url('./font/MICEMyungjo OTF.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mice1';
+    src: url('./font/MICEMyungjo.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

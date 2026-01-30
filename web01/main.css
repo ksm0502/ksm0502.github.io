@@ -1,0 +1,166 @@
+@charset "utf-8";
+
+.page {
+    clear: both;
+    width: 100vw;
+    padding: 40px 0px;
+}
+
+.page_wrap {
+    width: 1280px;
+    margin: 0 auto;
+    padding: 0 16px; 
+}
+
+.page_title {
+    text-align: center;
+    font-family: 'NanumPen';
+    font-size: 78px;
+    padding:0px 30px;
+    font-weight:600;
+}
+
+.page_title::before, .page_title::after {
+    font-size:100px;
+    display:inline-block;
+    margin-top: 10px;
+}
+
+.page_title::before {
+    content:'\201C';
+}
+
+.page_title::after {
+    content:'\201D';
+}
+
+.page_grid {
+    clear: both;
+    width: 100%;
+}
+
+#page1 {
+    background-color: #f9fff2;
+    background-image: url("./images/section2_bg1.png"), url("./images/section2_bg2.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center top, center bottom;
+}
+
+.row1 {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.row1 figure {
+    width: calc(50% - 10px); /* 반반씩 정확히 나눔 */
+}
+
+.row1 img {
+    width: 100%;
+    height: 450px; /* 큰 사진 높이 */
+    object-fit: cover;
+    display: block;
+}
+
+.row2 {
+    display: flex;
+    flex-wrap: wrap; /* 자리가 없으면 다음 줄로 넘김 */
+    gap: 20px;
+}
+
+.row2 figure {
+    /* 100%에서 간격을 뺀 후 3등분 */
+    width: calc(33.333% - 14px); 
+    margin-bottom: 10px; /* 줄 사이 간격 */
+}
+
+.row2 img {
+    width: 100%;
+    height: 300px; /* 3개 배치 시 가장 예쁜 높이 */
+    object-fit: cover;
+    display: block;
+}
+
+.big_thumb {
+    position: relative;
+}
+
+.big_thumb img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    display: block;
+    border: 1px solid #f1f1f1;
+}
+
+.big_thumb:hover img {
+    border: 1px solid #05AFF2;
+}
+
+.thumb_content {
+    position: absolute;
+    width: 100%;
+    bottom: 0; 
+    left: 0;
+    background: rgba(0, 0, 0, 0.5); 
+    padding: 12px 0;
+    box-sizing: border-box;
+}
+
+.big_thumb:hover img, .s_thumb:hover img {
+    border: 1px solid #05AFF2;
+    filter: brightness(1.2);
+}
+
+.tit1, .tit2, .tit3 {
+    text-align: center;
+    font-family: 'NanumPen';
+    color: #fff;
+    font-weight: 500;
+    text-shadow: 1px 1px 0px #333;
+    align-items: center;
+    line-height: 1.4;
+}
+
+.tit1 {
+    font-size:36px;
+}
+
+.tit2 {
+    font-size: 48px;
+}
+
+.s_thumb {
+    position: relative;
+}
+
+.s_thumb .tit2 {
+    color: #fff;
+    font-size: 1.1rem;
+    text-align: center;
+    margin: 0;
+}
+
+.s_thumb img {
+    width: 100%;
+    height: 288px;
+    object-fit: cover;
+    border: 1px solid #f1f1f1;
+    display: block;
+}
+
+.s_thumb:hover img {
+    border: 1px solid #05AFF2;
+}
+
+.s_thumb .thumb_content {
+position: absolute;
+    width: 100%;
+    bottom: 0; /* 사진 맨 아래에 배치 */
+    left: 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5); /* 반투명 배경으로 글자 강조 */
+    box-sizing: border-box;
+}

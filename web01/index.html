@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 ,maximum-scale=1.0, minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
+    <title>청주 문화 관광</title>
+    <!-- 메타포: 바로 가기 아이콘, 홈페이지 제목, 검색어, 설명 -->
+    <meta name="keywords" content="청주관광문화, 청주시청 관광문화, 청주시 여행정보, 직지, 상당산성">
+    <meta name="description" content="기록문화 창의도시 청주관광문화 홈페이지">
+    <meta name="description" content="청주관광문화 홈페이지">
+    <!-- 오픈 그래프 -->
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="청주시청 관광문화 홈페이지">
+    <meta property="og:description" content="청주관광문화 홈페이지">
+    <meta property="og:site_name" content="청주관광문화">
+    <meta property="og:url" content="https://okgunyang.github.io/web01">   <!-- 실제 사이트 주소로 변경 -->
+    <meta property="og:image" content="https://okgunyang.github.io/images/og-image.jpg">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="청주시청 관광문화 홈페이지">
+    <meta name="twitter:description" content="청주관광문화 홈페이지">
+    <meta name="twitter:image" content="https://okgunyang.github.io/images/og-image.jpg">
+    <meta name="twitter:site" content="@cjcitynet">   <!-- 공식 계정 있으면 -->
+    <!-- 폰트, 초기화(reset.css), 아이콘 셋 -->
+    <link rel="stylesheet" href="reset.css">
+    <!-- <link rel="stylesheet" href="normalize.css"> -->
+    <link rel="stylesheet" href="mice.css">
+    <link rel="stylesheet" href="iconset.css">
+    <link rel="stylesheet" href="xeicon.css">
+    <style>
+    h1, h2, h3, h4, h5, h6 { font-family: 'Mice', 'Mice1', serif; line-height:1.6; padding-top:0.6em; padding-bottom:0.6em; }
+    h1 { font-weight: 900; font-size:72px; }
+    h2 { font-weight: 800; font-size:60px; }
+    h3 { font-weight: 700; font-size:48px; }
+    h4 { font-weight: 600; font-size:36px; }
+    h5 { font-weight: 500; font-size:20px; }
+    h6 { font-weight: 400; font-size:12px; }
+    p { font-family: 'Mice', 'Mice1', serif; font-weight:400; }
+    </style> 
+    <link rel="stylesheet" href="cheongju.css">
+    <style>
+    #vs {
+        position:relative;
+    }
+    #vs .img_box {
+        width:300vw;
+        overflow: hidden;
+        transition: 0.8s; 
+    }
+
+    #vs .img_box li {
+        width: 100vw;
+        float:left;
+        position: relative;
+    }
+
+    #vs img {
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+    }
+
+    .tit_box {
+        position: absolute;
+        top: 50%;
+        width: 100%; 
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+    }
+
+    .tit_box h3 {
+        text-align: center;
+        font-family: 'Mice', 'Mice1', serif !important;
+        font-size: 80px;
+        text-shadow: 2px 2px 0 #2F7D32;
+    }
+
+    .tit_box a {
+        display: block;
+        width: 150px;
+        line-height: 60px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 300;
+        clear: both;
+        margin: 10px auto;
+        color: #fff;
+        text-shadow: 1px 1px 0px #2F7D32;
+        background-color: rgba(47, 125, 50, 0.7);
+        transition: 0.6s; 
+        border-radius: 35px 0px 35px 0px; 
+    }
+
+    .tit_box a:hover {
+        border-radius: 0px 35px 0px 35px;
+    }
+
+    .btn_box {
+        position:absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 10;
+        width: 100%;
+        height:24px;
+    }
+    .btn_wrap {
+        width: 80px;
+        margin: 0 auto;
+        display: flex;
+    }
+    .btn_wrap li {
+        width: 25px;
+    }
+    .vs_btn {
+        display: block;
+        width: 15px;
+        height: 15px;
+        border-radius: 10px;
+        background-color: #fff;
+        cursor: pointer;
+        border:1px solid #ccc;
+        box-shadow: 1px 1px 0px #fff;
+    }
+    .ra {
+        display: none; 
+    }
+    #ra1:checked ~ .img_box {
+        margin-left: 0;
+    }
+    #ra2:checked ~ .img_box {
+        margin-left:-100vw;
+    }
+    #ra3:checked ~ .img_box {
+        margin-left:-200vw;
+    }
+    #ra1:checked ~ .btn_box #vs_btn1 {
+        background-color: #1B5E20;
+    }
+    #ra2:checked ~ .btn_box #vs_btn2 {
+        background-color: #1B5E20;
+    }
+    #ra3:checked ~ .btn_box #vs_btn3 {
+        background-color: #1B5E20;
+    }
+    </style>
+    <link rel="stylesheet" href="main.css"><!-- 페이지1 -->
+    <link rel="stylesheet" href="main2.css"><!-- 페이지2 -->
+    <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+<div class="wrap">
+    <header id="hd">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="./images/logo_cj.png" alt="청주문화관광로고">
+            </a>
+            <input type="checkbox" id="ck1" class="ck_item">
+            <div id="smart">
+                <label class="smart_wrap" for="ck1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+            <nav class="gnb">
+                <ul class="menu">
+                    <li>
+                        <a href="sub1.html" class="dp1">청주여행</a>
+                        <ul class="sub">
+                            <li><a href="sub11.html">역사문화탐방</a></li>
+                            <li><a href="sub12.html">예술기록체험</a></li>
+                            <li><a href="sub13.html">생태자연쉼터</a></li>
+                            <li><a href="sub14.html">힐링레저여행</a></li>
+                            <li><a href="sub15.html">로컬전통시장</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="sub2.html" class="dp1">꿀잼축제</a>
+                        <ul class="sub">
+                            <li><a href="sub21.html">직지문화축제</a></li>
+                            <li><a href="sub22.html">청주공예비엔날레</a></li>
+                            <li><a href="#">세종대왕초정약수축제</a></li>
+                            <li><a href="#">청주읍성나들이</a></li>
+                            <li><a href="#">디저트페스타</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="sub3.html" class="dp1">역사/문화</a>
+                        <ul class="sub">
+                            <li><a href="sub31.html">국가지정유산</a></li>
+                            <li><a href="sub32.html">기록문화/직지</a></li>
+                            <li><a href="#">전통사찰</a></li>
+                            <li><a href="#">청주인물</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="sub4.html" class="dp1">여행가이드</a>
+                        <ul class="sub">
+                            <li><a href="https://ticket.cheongju.go.kr/www/index.do">시티투어신청</a></li>
+                            <li><a href="sub42.html">교통정보</a></li>
+                            <li><a href="#">관광안내소</a></li>
+                            <li><a href="#">관광지도신청</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="sub5.html" class="dp1">커뮤니티</a>
+                        <ul class="sub">
+                            <li><a href="sub51.html">청주소식</a></li>
+                            <li><a href="sub52.html">내가찍은청주</a></li>
+                            <li><a href="#">여행후기</a></li>
+                            <li><a href="#">Q&A</a></li>
+                            <li><a href="#">불편신고</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <nav class="tnb">
+                <a href="log.html">로그인</a>
+                <a href="join.html">회원가입</a>
+                <a href="contact.html">Contact US</a>
+            </nav>
+        </div>
+    </header>
+    <main class="content">
+        <figure id="vs">
+            <input type="radio" id="ra1" class="ra" name="ra" checked>
+            <input type="radio" id="ra2" class="ra" name="ra">
+            <input type="radio" id="ra3" class="ra" name="ra">
+            <ul class="img_box">
+                <li>
+                    <img src="./images/Cheongnamdae.jpg" alt="청남대">
+                    <div class="tit_box">
+                        <h3>대통령의 휴양지<br> 청남대</h3>
+                        <a href="https://chnam.chungbuk.go.kr/index.do#none">자세히보기</a>
+                    </div>
+                </li>
+                <li>
+                    <img src="./images/archipreso.jpg" alt="문화제조창">
+                    <div class="tit_box">
+                        <h3>버려진 공간에서 피어난 문화의 꽃<br>문화제조창</h3>
+                        <a href="https://cfactory.co.kr/" target="_blank">자세히보기</a>
+                    </div>
+                </li>
+                <li>
+                    <<img src="./images/Printing Museum.png" alt="청주고인쇄박물관">
+                    <div class="tit_box">
+                        <h3>세계 기록문화의 요람<br> 청주고인쇄박물관</h3>
+                        <a href="https://www.cheongju.go.kr/jikjiworld/index.do">자세히보기</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="btn_box">
+                <ul class="btn_wrap">
+                    <li><label for="ra1" class="vs_btn" id="vs_btn1"></label></li>
+                    <li><label for="ra2" class="vs_btn" id="vs_btn2"></label></li>
+                    <li><label for="ra3" class="vs_btn" id="vs_btn3"></label></li>
+                </ul>
+            </div>
+        </figure>
+        <section class="page" id="page1">
+            <div class="page_wrap">
+                <h2 class="page_title">청주(淸州)에 머물다</h2>
+                <div class="page_grid">
+                    <div class="row1">
+                        <figure id="big_thumb1" class="big_thumb">
+                            <a href="https://www.mmca.go.kr/visitingInfo/cheongjuInfo.do">
+                                <img src="./images/MMCA.jpg" alt="국립현대미술관">
+                                <div class="thumb_content">
+                                    <h6 class="tit1">도시 재생의 꽃</h6>
+                                    <h5 class="tit2">국립현대미술관 청주</h5>
+                                </div>
+                            </a>    
+                        </figure>
+                        <figure id="big_thumb2" class="big_thumb">
+                            <a href="https://jikjifestival.com/">
+                                <img src="./images/Jikji Festival.png" alt="직지문화제">
+                                <div class="thumb_content">
+                                    <h6 class="tit1">기록의 역사</h6>
+                                    <h5 class="tit2">직지문화축제</h5>
+                                </div>
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="row2">
+                        <figure id="s_thumb1" class="s_thumb">
+                            <a href="https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=56&tourNo=1067&searchMainSe=ATTR">
+                                <img src="./images/Suamgol.jpg" alt="수암골">
+                                <div class="thumb_content">
+                                    <h5 class="tit2">수암골 벽화마을</h5>
+                                </div>
+                            </a>
+                        </figure>
+                        <figure id="s_thumb2" class="s_thumb">
+                            <a href="https://crs.cjuc.or.kr/com/facPortal.do?system_cd=B003">
+                                <img src="./images/Chojeong.jpg" alt="초정행궁">
+                                <div class="thumb_content">
+                                    <h5 class="tit2">초정 행궁</h5>
+                                </div>
+                            </a>
+                        </figure>
+                        <figure id="s_thumb3" class="s_thumb">
+                            <a href="https://www.diningcode.com/list.dc?query=%EC%B2%AD%EC%A3%BC">
+                                <img src="./images/CHFD.jpg" alt="청주 맛집">
+                                <div class="thumb_content">
+                                    <h5 class="tit2">청주 맛집</h5>
+                                </div>
+                            </a>
+                        </figure>
+                        <figure id="s_thumb4" class="s_thumb">
+                            <a href="https://www.yeogi.com/accommodation/kr/충청북도/청주시">
+                                <img src="./images/Cheongjustay.jpg" alt="편안한 숙박">
+                                <div class="thumb_content">
+                                    <h5 class="tit2">청주 숙박</h5>
+                                </div>
+                            </a>
+                        </figure>
+                        <figure id="s_thumb5" class="s_thumb">
+                            <a href="">
+                                <img src="./images/cheongjucamping.jpg" alt="즐거운 캠핑">
+                                <div class="thumb_content">
+                                    <h5 class="tit2">캠핑, 글램핑</h5>
+                                </div>
+                            </a>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="page" id="page2">
+            <div class="page_wrap">
+                <h2 class="page_title">지금, <span class="txt_color">Cheongju</span>를 누리다</h2>
+                <div class="page_grid2">
+                    <div class="row3">
+                        <div class="movie_wrap">
+                            <ul class="movie_lst">
+                                <li class="col" id="movie1"><iframe src="https://www.youtube.com/embed/s3MRpRooimk?si=74XcBTJx4-z7n93o" allowfullscreen></iframe></li>
+                                <li class="col" id="movie2"><iframe src="https://www.youtube.com/embed/rQNUyFbD4dk?si=4GODIvhNcbbJODm_" allowfullscreen></iframe></li>
+                                <li class="col" id="movie3"><iframe src="https://www.youtube.com/embed/RW2zVcyqdCg?si=wUlE6dTJ9x85n9jT" allowfullscreen></iframe></li>
+                                <li class="col" id="movie4"><iframe src="https://www.youtube.com/embed/4qeRSHhZjTM?si=sSKDvtqeCtBVhaaW" allowfullscreen></iframe></li>
+                                <li class="col" id="movie5"><iframe src="https://www.youtube.com/embed/fD1Ud2DMOx8?si=Mb8-DAMOHn0u-BKH" allowfullscreen></iframe></li>
+                                <li class="col" id="movie6"><iframe src="https://www.youtube.com/embed/Oui9JMMcTW4?si=0K-RqhltjlAXCgar" allowfullscreen></iframe></li>
+                                <li class="col" id="movie7"><iframe src="https://www.youtube.com/embed/LTfV3XAGz4M?si=0lppjBrKT5zbuvrm" allowfullscreen></iframe></li>
+                                <li class="col" id="movie7"><iframe src="https://www.youtube.com/embed/ymc0ih_jBpI?si=5uKOvOeQfS5_izU4" title="YouTube video player" allowfullscreen></iframe></li>
+                            </ul>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row4">
+                        <h4 class="box_tit">자주 찾는 메뉴</h4>
+                        <ul class="box_lst">
+                            <li class="box_item" id="box_item1">
+                                <a href="">
+                                    <div class="box_img"></div>
+                                    <h5 class="box_item_tit">관광지도 신청</h5>
+                                </a>
+                            </li>
+                            <li class="box_item" id="box_item2">
+                                <a href="">
+                                    <div class="box_img"></div>
+                                    <h5 class="box_item_tit">관광안내소</h5>
+                                </a>
+                            </li>
+                            <li class="box_item" id="box_item3">
+                                <a href="">
+                                    <div class="box_img"></div>
+                                    <h5 class="box_item_tit">관광지요금</h5>
+                                </a>
+                            </li>
+                            <li class="box_item" id="box_item4">
+                                <a href="">
+                                    <div class="box_img"></div>
+                                    <h5 class="box_item_tit">문화관광해설</h5>
+                                </a>
+                            </li>
+                            <li class="box_item" id="box_item5">
+                                <a href="">
+                                    <div class="box_img"></div>
+                                    <h5 class="box_item_tit">거제여행사</h5>
+                                </a>
+                            </li>
+                            <li class="box_item" id="box_item6">
+                                <a href="">
+                                    <div class="box_img"></div>
+                                    <h5 class="box_item_tit">교통정보</h5>
+                                </a>
+                            </li>
+                            <li class="box_item" id="box_item7">
+                                <a href="">
+                                    <div class="box_img"></div>
+                                    <h5 class="box_item_tit">렌터카</h5>
+                                </a>
+                            </li>
+                            <li class="box_item" id="box_item8">
+                                <a href="">
+                                    <div class="box_img"></div>
+                                    <h5 class="box_item_tit">교통약자콜택시</h5>
+                                </a>
+                            </li>
+                            <li class="box_item" id="box_item9">
+                                <a href="">
+                                    <div class="box_img"></div>
+                                    <h5 class="box_item_tit">관광홍보영상</h5>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>    
+            </div>
+        </section>
+    </main>
+    <footer id="ft">
+         <div class="container">
+            <nav id="relation">
+                <ul>
+                    <li>
+                        <label for="ra1">유관기관</label><br>
+                        <select onchange="if(this.value) window.open(this.value, '_blank');">
+                            <option value="">선택하세요</option>
+                            <option value="https://www.cheongju.go.kr/www/index.do">청주시청</option>
+                            <option value="https://council.cheongju.go.kr/">청주시의회</option>
+                            <option value="https://www.cjmh.or.kr/">청주문화원</option>
+                            <option value="https://cheongju.grandculture.net/cheongju">디지털청주문화대전</option>
+                            <option value="https://www.cheongju.go.kr/munwhayesul/index.do">청주문화체육관광국</option>
+                            <option value="https://www.cjwf.or.kr/home/main.php">청주복지재단</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="ra2">구청안내</label><br>
+                        <select onchange="if(this.value) window.open(this.value, '_blank');">
+                            <option value="">선택하세요</option>
+                            <option value="https://www.cheongju.go.kr/sangdang/index.do">상당구청</option>
+                            <option value="https://www.cheongju.go.kr/seowon/index.do">서원구청</option>
+                            <option value="https://www.cheongju.go.kr/heungdeok/index.do">흥덕구청</option>
+                            <option value="https://www.cheongju.go.kr/cheongwon/index.do">청원구청</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="ra3">관광시설</label><br>
+                        <select onchange="if(this.value) window.open(this.value, '_blank');">
+                            <option value="">선택하세요</option>
+                            <option value="https://www.chungbuk.go.kr/chnam/index.do#none">청남대</option>
+                            <option value="https://cmoa.cheongju.go.kr/www/index.do">청주시립박물관</option>
+                            <option value="https://www.cheongju.go.kr/land/index.do">청주랜드</option>
+                            <option value="https://lotus.cheongju.go.kr/main.php">강내연꽃마을</option>
+                            <option value="https://www.kimsoohyundrama.org/arthall/index.do">김수현 드라마 아트홀</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="ra4">기타사이트</label><br>
+                        <select onchange="if(this.value) window.open(this.value, '_blank');">
+                            <option value="">선택하세요</option>
+                            <option value="https://www.chungbuk.go.kr/www/index.do">충청북도청</option>
+                            <option value="https://www.korail.com/intro">코레일</option>
+                            <option value="https://www.cbckl.kr/www/index.do">충북콘텐츠코리아랩</option>
+                            <option value="https://cbgame.org/">충북글로벌게임센터</option>
+                        </select>
+                    </li>
+                </ul>
+            </nav>
+            <nav id="banner_bar">
+                <ul>
+                    <li><a href="https://www.budongsan24.kr/"><img src="./images/ban01.gif" alt="통합신고센터"></a></li>
+                    <li><a href="https://www.laiis.go.kr/lips/mlo/lcl/organizationList.do"><img src="./images/ban02.gif" alt="내고장알리미"></a></li>
+                    <li><a href="https://www.mcst.go.kr/site/main.jsp"><img src="./images/ban03.gif" alt="문화체육관광부"></a></li>
+                    <li><a href="https://korean.visitkorea.or.kr/main/main.do"><img src="./images/ban04.png" alt="대한민국 구석구석"></a></li>
+                    <li><a href="https://www.gov.kr/yearend_main.html?from=%2F"><img src="./images/ban05.png" alt="정부24"></a></li>
+                    <li><a href="https://tour.chungbuk.go.kr/www/index.do"><img src="./images/ban06.png" alt="충북나드리"></a></li>
+                </ul>
+            </nav>
+            <nav id="fnb">
+                <a href="privacy.html">개인정보처리방침</a>
+                <a href="#">이메일무단수집거부</a>
+                <a href="#">저작권정책</a>
+                <a href="#">홈페이지 의견접수</a>
+                <a href="#" download>뷰어 다운로드</a>
+            </nav>
+            <div class="copyright">
+                <p class="addr">(28542) 충청북도 청주시 상당구 상당로 155 (북문로3가) / 대표전화 : 043)201-2114</p>
+                <p class="copy">Copyright ⓒ 2026 CHEONGJU CITY. All Rights Reserved.</p>
+            </div>
+         </div>   
+    </footer>
+</div>
+</body>
+</html>
