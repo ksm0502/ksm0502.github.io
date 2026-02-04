@@ -41,7 +41,7 @@
 
 #page1 {
     background-color: #f9fff2;
-    background-image: url("./images/section2_bg1.png"), url("./images/section2_bg2.png");
+    background-image: url("./images/section2_bg2.png");
     background-repeat: no-repeat;
     background-size: auto;
     background-position: center top, center bottom;
