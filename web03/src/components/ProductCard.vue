@@ -1,5 +1,5 @@
 <template>
-    <div class="product-card h-100" @click="goToDetail">
+  <div class="product-card h-100" @click="goToDetail">
     <div class="card border-0 h-100 overflow-hidden" style="cursor: pointer; border-radius: 4px;">
       <!-- Image -->
       <div class="position-relative overflow-hidden" style="padding-top: 125%; background: var(--color-light);">

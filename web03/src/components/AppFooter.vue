@@ -44,7 +44,7 @@
       </div>
       <hr class="border-secondary" />
       <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-        <p class="text-white-50 mb-0" style="font-size: 12px;">© 2025 LUXE. All rights reserved.</p>
+        <p class="text-white-50 mb-0" style="font-size: 12px;">© 2026 LUXE. All rights reserved.</p>
         <div class="d-flex gap-3 mt-2 mt-md-0">
           <a href="#" class="text-white-50 footer-link" style="font-size: 12px;">개인정보처리방침</a>
           <a href="#" class="text-white-50 footer-link" style="font-size: 12px;">이용약관</a>

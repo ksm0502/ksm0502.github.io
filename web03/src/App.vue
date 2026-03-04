@@ -1,7 +1,6 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted } from 'vue';
 import { useShopStore } from './store/shop'
-import router from './router'
 import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue'
 import AppToast from './components/AppToast.vue'
@@ -10,10 +9,10 @@ import AppToast from './components/AppToast.vue'
 <template>
   <div>
     <AppHeader />
-    <main style ="min-height: 80vh">
+    <main style="min-height: 80vh">
       <RouterView v-slot="{ Component }">
         <Transition name="fade" mode="out-in">
-          <component :is="Component" />
+          <component :is="Component"/>
         </Transition>
       </RouterView>
     </main>
@@ -23,5 +22,6 @@ import AppToast from './components/AppToast.vue'
 </template>
 
 <style scoped>
-
+.fade-enter-active, .fade-leave-active { transition: opacity 0.25s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
 </style>

@@ -1,3 +1,64 @@
+<script setup>
+import { ref, computed, watch, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { useShopStore } from '@/store/shop'
+import ProductCard from '@/components/ProductCard.vue'
+
+const store = useShopStore()
+const route = useRoute()
+
+const filters = ref({
+  category: 'all',
+  maxPrice: 400000,
+  badge: '',
+  search: '',
+  minRating: 0,
+  sort: 'default'
+})
+
+// Sync filters from URL query params
+onMounted(() => {
+  if (route.query.category) filters.value.category = route.query.category
+  if (route.query.search) filters.value.search = route.query.search
+  if (route.query.badge) filters.value.badge = route.query.badge
+})
+
+watch(() => route.query, (q) => {
+  if (q.category) filters.value.category = q.category
+  if (q.search) filters.value.search = q.search
+  if (q.badge) filters.value.badge = q.badge
+}, { deep: true })
+
+const filteredProducts = computed(() => {
+  let list = [...store.products]
+  if (filters.value.category !== 'all') list = list.filter(p => p.category === filters.value.category)
+  if (filters.value.badge) list = list.filter(p => p.badge === filters.value.badge)
+  if (filters.value.search) {
+    const q = filters.value.search.toLowerCase()
+    list = list.filter(p => p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q))
+  }
+  list = list.filter(p => p.price <= filters.value.maxPrice)
+  if (filters.value.minRating > 0) list = list.filter(p => p.rating >= filters.value.minRating)
+
+  switch (filters.value.sort) {
+    case 'price-asc': return list.sort((a, b) => a.price - b.price)
+    case 'price-desc': return list.sort((a, b) => b.price - a.price)
+    case 'rating': return list.sort((a, b) => b.rating - a.rating)
+    case 'review': return list.sort((a, b) => b.reviewCount - a.reviewCount)
+    default: return list
+  }
+})
+
+const pageTitle = computed(() => {
+  const cat = store.categories.find(c => c.id === filters.value.category)
+  return cat && cat.id !== 'all' ? cat.name : '전체 상품'
+})
+
+function resetFilters() {
+  filters.value = { category: 'all', maxPrice: 400000, badge: '', search: '', minRating: 0, sort: 'default' }
+}
+</script>
+
 <template>
   <div class="py-5">
     <div class="container">
@@ -116,63 +177,6 @@
   </div>
 </template>
 
-<script setup>
-import { ref, computed, watch, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { useShopStore } from '@/store/shop'
-import ProductCard from '@/components/ProductCard.vue'
+<style scoped>
 
-const store = useShopStore()
-const route = useRoute()
-
-const filters = ref({
-  category: 'all',
-  maxPrice: 400000,
-  badge: '',
-  search: '',
-  minRating: 0,
-  sort: 'default'
-})
-
-// Sync filters from URL query params
-onMounted(() => {
-  if (route.query.category) filters.value.category = route.query.category
-  if (route.query.search) filters.value.search = route.query.search
-  if (route.query.badge) filters.value.badge = route.query.badge
-})
-
-watch(() => route.query, (q) => {
-  if (q.category) filters.value.category = q.category
-  if (q.search) filters.value.search = q.search
-  if (q.badge) filters.value.badge = q.badge
-}, { deep: true })
-
-const filteredProducts = computed(() => {
-  let list = [...store.products]
-  if (filters.value.category !== 'all') list = list.filter(p => p.category === filters.value.category)
-  if (filters.value.badge) list = list.filter(p => p.badge === filters.value.badge)
-  if (filters.value.search) {
-    const q = filters.value.search.toLowerCase()
-    list = list.filter(p => p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q))
-  }
-  list = list.filter(p => p.price <= filters.value.maxPrice)
-  if (filters.value.minRating > 0) list = list.filter(p => p.rating >= filters.value.minRating)
-
-  switch (filters.value.sort) {
-    case 'price-asc': return list.sort((a, b) => a.price - b.price)
-    case 'price-desc': return list.sort((a, b) => b.price - a.price)
-    case 'rating': return list.sort((a, b) => b.rating - a.rating)
-    case 'review': return list.sort((a, b) => b.reviewCount - a.reviewCount)
-    default: return list
-  }
-})
-
-const pageTitle = computed(() => {
-  const cat = store.categories.find(c => c.id === filters.value.category)
-  return cat && cat.id !== 'all' ? cat.name : '전체 상품'
-})
-
-function resetFilters() {
-  filters.value = { category: 'all', maxPrice: 400000, badge: '', search: '', minRating: 0, sort: 'default' }
-}
-</script>
+</style>
