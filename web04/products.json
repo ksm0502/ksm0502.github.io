@@ -6,7 +6,7 @@
     "categoryId": 1,
     "categoryName": "저포드맵",
     "description": "",
-    "imageUrl": "/images/product1.gif"
+    "imageUrl": "images/product1.gif"
   },
   {
     "id": 2,
@@ -15,7 +15,7 @@
     "categoryId": 1,
     "categoryName": "저포드맵",
     "description": "",
-    "imageUrl": "/images/product2.gif"
+    "imageUrl": "images/product2.gif"
   },
   {
     "id": 3,
@@ -24,7 +24,7 @@
     "categoryId": 1,
     "categoryName": "저포드맵",
     "description": "",
-    "imageUrl": "/images/product3.gif"
+    "imageUrl": "images/product3.gif"
   },
   {
     "id": 4,
@@ -33,7 +33,7 @@
     "categoryId": 1,
     "categoryName": "저포드맵",
     "description": "",
-    "imageUrl": "/images/product4.jpg"
+    "imageUrl": "images/product4.jpg"
   },
   {
     "id": 5,
@@ -42,7 +42,7 @@
     "categoryId": 1,
     "categoryName": "저포드맵",
     "description": "",
-    "imageUrl": "/images/product5.jpg"
+    "imageUrl": "images/product5.jpg"
   },
   {
     "id": 6,
@@ -51,7 +51,7 @@
     "categoryId": 1,
     "categoryName": "저포드맵",
     "description": "",
-    "imageUrl": "/images/product6.jpg"
+    "imageUrl": "images/product6.jpg"
   },
   {
     "id": 7,
@@ -60,7 +60,7 @@
     "categoryId": 1,
     "categoryName": "저포드맵",
     "description": "",
-    "imageUrl": "/images/product7.jpg"
+    "imageUrl": "images/product7.jpg"
   },
   {
     "id": 8,
@@ -69,7 +69,7 @@
     "categoryId": 2,
     "categoryName": "슬로우에이징",
     "description": "",
-    "imageUrl": "/images/product8.gif"
+    "imageUrl": "images/product8.gif"
   },
   {
     "id": 9,
@@ -78,7 +78,7 @@
     "categoryId": 2,
     "categoryName": "슬로우에이징",
     "description": "",
-    "imageUrl": "/images/product9.gif"
+    "imageUrl": "images/product9.gif"
   },
   {
     "id": 10,
@@ -87,7 +87,7 @@
     "categoryId": 2,
     "categoryName": "슬로우에이징",
     "description": "",
-    "imageUrl": "/images/product10.gif"
+    "imageUrl": "images/product10.gif"
   },
   {
     "id": 11,
@@ -96,7 +96,7 @@
     "categoryId": 2,
     "categoryName": "슬로우에이징",
     "description": "",
-    "imageUrl": "/images/product11.jpg"
+    "imageUrl": "images/product11.jpg"
   },
   {
     "id": 12,
@@ -105,7 +105,7 @@
     "categoryId": 2,
     "categoryName": "슬로우에이징",
     "description": "",
-    "imageUrl": "/images/product12.jpg"
+    "imageUrl": "images/product12.jpg"
   },
   {
     "id": 13,
@@ -114,7 +114,7 @@
     "categoryId": 2,
     "categoryName": "슬로우에이징",
     "description": "",
-    "imageUrl": "/images/product13.jpg"
+    "imageUrl": "images/product13.jpg"
   },
   {
     "id": 14,
@@ -123,7 +123,7 @@
     "categoryId": 2,
     "categoryName": "슬로우에이징",
     "description": "",
-    "imageUrl": "/images/product14.jpg"
+    "imageUrl": "images/product14.jpg"
   },
   {
     "id": 15,
@@ -132,7 +132,7 @@
     "categoryId": 3,
     "categoryName": "오리지널",
     "description": "",
-    "imageUrl": "/images/product15.jpg"
+    "imageUrl": "images/product15.jpg"
   },
   {
     "id": 16,
@@ -141,7 +141,7 @@
     "categoryId": 3,
     "categoryName": "오리지널",
     "description": "",
-    "imageUrl": "/images/product16.jpg"
+    "imageUrl": "images/product16.jpg"
   },
   {
     "id": 17,
@@ -150,7 +150,7 @@
     "categoryId": 3,
     "categoryName": "오리지널",
     "description": "",
-    "imageUrl": "/images/product17.jpg"
+    "imageUrl": "images/product17.jpg"
   },
   {
     "id": 18,
@@ -159,7 +159,7 @@
     "categoryId": 3,
     "categoryName": "오리지널",
     "description": "",
-    "imageUrl": "/images/product18.jpg"
+    "imageUrl": "images/product18.jpg"
   },
   {
     "id": 19,
@@ -168,7 +168,7 @@
     "categoryId": 3,
     "categoryName": "오리지널",
     "description": "",
-    "imageUrl": "/images/product19.jpg"
+    "imageUrl": "images/product19.jpg"
   },
   {
     "id": 20,
@@ -177,7 +177,7 @@
     "categoryId": 3,
     "categoryName": "오리지널",
     "description": "",
-    "imageUrl": "/images/product20.jpg"
+    "imageUrl": "images/product20.jpg"
   },
   {
     "id": 21,
@@ -186,7 +186,7 @@
     "categoryId": 3,
     "categoryName": "오리지널",
     "description": "",
-    "imageUrl": "/images/product21.jpg"
+    "imageUrl": "images/product21.jpg"
   },
   {
     "id": 22,
@@ -195,7 +195,7 @@
     "categoryId": 3,
     "categoryName": "오리지널",
     "description": "",
-    "imageUrl": "/images/product22.jpg"
+    "imageUrl": "images/product22.jpg"
   },
   {
     "id": 23,
@@ -204,7 +204,7 @@
     "categoryId": 4,
     "categoryName": "시그니처",
     "description": "",
-    "imageUrl": "/images/product23.jpg"
+    "imageUrl": "images/product23.jpg"
   },
   {
     "id": 24,
@@ -213,7 +213,7 @@
     "categoryId": 4,
     "categoryName": "시그니처",
     "description": "",
-    "imageUrl": "/images/product24.jpg"
+    "imageUrl": "images/product24.jpg"
   },
   {
     "id": 25,
@@ -222,7 +222,7 @@
     "categoryId": 4,
     "categoryName": "시그니처",
     "description": "",
-    "imageUrl": "/images/product25.jpg"
+    "imageUrl": "images/product25.jpg"
   },
   {
     "id": 26,
@@ -231,7 +231,7 @@
     "categoryId": 4,
     "categoryName": "시그니처",
     "description": "",
-    "imageUrl": "/images/product26.jpg"
+    "imageUrl": "images/product26.jpg"
   },
   {
     "id": 27,
@@ -240,7 +240,7 @@
     "categoryId": 4,
     "categoryName": "시그니처",
     "description": "",
-    "imageUrl": "/images/product27.jpg"
+    "imageUrl": "images/product27.jpg"
   },
   {
     "id": 28,
@@ -249,7 +249,7 @@
     "categoryId": 4,
     "categoryName": "시그니처",
     "description": "",
-    "imageUrl": "/images/product28.jpg"
+    "imageUrl": "images/product28.jpg"
   },
   {
     "id": 29,
@@ -258,7 +258,7 @@
     "categoryId": 5,
     "categoryName": "더클린커피",
     "description": "",
-    "imageUrl": "/images/product29.jpg",
+    "imageUrl": "images/product29.jpg",
     "options": {
       "volume": [
         {
@@ -285,7 +285,7 @@
     "categoryId": 5,
     "categoryName": "더클린커피",
     "description": "",
-    "imageUrl": "/images/product30.jpg",
+    "imageUrl": "images/product30.jpg",
     "options": {
       "volume": [
         {
@@ -312,7 +312,7 @@
     "categoryId": 5,
     "categoryName": "더클린커피",
     "description": "",
-    "imageUrl": "/images/product31.jpg",
+    "imageUrl": "images/product31.jpg",
     "options": {
       "volume": [
         {
@@ -339,7 +339,7 @@
     "categoryId": 5,
     "categoryName": "더클린커피",
     "description": "",
-    "imageUrl": "/images/product32.jpg",
+    "imageUrl": "images/product32.jpg",
     "options": {
       "volume": [
         {
@@ -366,7 +366,7 @@
     "categoryId": 5,
     "categoryName": "더클린커피",
     "description": "",
-    "imageUrl": "/images/product33.jpg",
+    "imageUrl": "images/product33.jpg",
     "options": {
       "volume": [
         {
@@ -393,7 +393,7 @@
     "categoryId": 6,
     "categoryName": "헬시푸드",
     "description": "",
-    "imageUrl": "/images/product34.jpg"
+    "imageUrl": "images/product34.jpg"
   },
   {
     "id": 35,
@@ -402,7 +402,7 @@
     "categoryId": 6,
     "categoryName": "헬시푸드",
     "description": "",
-    "imageUrl": "/images/product35.jpg"
+    "imageUrl": "images/product35.jpg"
   },
   {
     "id": 36,
@@ -411,6 +411,6 @@
     "categoryId": 6,
     "categoryName": "헬시푸드",
     "description": "",
-    "imageUrl": "/images/product36.jpg"
+    "imageUrl": "images/product36.jpg"
   }
 ]
