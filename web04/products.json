@@ -1,0 +1,416 @@
+[
+  {
+    "id": 1,
+    "name": "토마토 비프 스튜 & 두부",
+    "price": 8900,
+    "categoryId": 1,
+    "categoryName": "저포드맵",
+    "description": "",
+    "imageUrl": "/images/product1.gif"
+  },
+  {
+    "id": 2,
+    "name": "간장 수비드 닭다리살 & 오믈렛",
+    "price": 8900,
+    "categoryId": 1,
+    "categoryName": "저포드맵",
+    "description": "",
+    "imageUrl": "/images/product2.gif"
+  },
+  {
+    "id": 3,
+    "name": "들깨 오리불고기 & 두부",
+    "price": 8900,
+    "categoryId": 1,
+    "categoryName": "저포드맵",
+    "description": "",
+    "imageUrl": "/images/product3.gif"
+  },
+  {
+    "id": 4,
+    "name": "토마토 치킨 스튜 & 두부",
+    "price": 8900,
+    "categoryId": 1,
+    "categoryName": "저포드맵",
+    "description": "",
+    "imageUrl": "/images/product4.jpg"
+  },
+  {
+    "id": 5,
+    "name": "간장 수비드 목살 & 오믈렛",
+    "price": 8900,
+    "categoryId": 1,
+    "categoryName": "저포드맵",
+    "description": "",
+    "imageUrl": "/images/product5.jpg"
+  },
+  {
+    "id": 6,
+    "name": "순살 갈비찜 & 두부",
+    "price": 8900,
+    "categoryId": 1,
+    "categoryName": "저포드맵",
+    "description": "",
+    "imageUrl": "/images/product6.jpg"
+  },
+  {
+    "id": 7,
+    "name": "순살 삼계 찜닭 & 두부",
+    "price": 8900,
+    "categoryId": 1,
+    "categoryName": "저포드맵",
+    "description": "",
+    "imageUrl": "/images/product7.jpg"
+  },
+  {
+    "id": 8,
+    "name": "수비드 간장 치킨",
+    "price": 8900,
+    "categoryId": 2,
+    "categoryName": "슬로우에이징",
+    "description": "",
+    "imageUrl": "/images/product8.gif"
+  },
+  {
+    "id": 9,
+    "name": "미소버터 대구 조림",
+    "price": 8900,
+    "categoryId": 2,
+    "categoryName": "슬로우에이징",
+    "description": "",
+    "imageUrl": "/images/product9.gif"
+  },
+  {
+    "id": 10,
+    "name": "아라비아따 오리 찜",
+    "price": 8900,
+    "categoryId": 2,
+    "categoryName": "슬로우에이징",
+    "description": "",
+    "imageUrl": "/images/product10.gif"
+  },
+  {
+    "id": 11,
+    "name": "토마토 로제 닭갈비",
+    "price": 8900,
+    "categoryId": 2,
+    "categoryName": "슬로우에이징",
+    "description": "",
+    "imageUrl": "/images/product11.jpg"
+  },
+  {
+    "id": 12,
+    "name": "코코넛 크림 치킨커리",
+    "price": 8900,
+    "categoryId": 2,
+    "categoryName": "슬로우에이징",
+    "description": "",
+    "imageUrl": "/images/product12.jpg"
+  },
+  {
+    "id": 13,
+    "name": "시트러스 대구 찜",
+    "price": 8900,
+    "categoryId": 2,
+    "categoryName": "슬로우에이징",
+    "description": "",
+    "imageUrl": "/images/product13.jpg"
+  },
+  {
+    "id": 14,
+    "name": "미소버터 연어 조림",
+    "price": 8900,
+    "categoryId": 2,
+    "categoryName": "슬로우에이징",
+    "description": "",
+    "imageUrl": "/images/product14.jpg"
+  },
+  {
+    "id": 15,
+    "name": "수비드 통삼겹 된장 덮밥",
+    "price": 8900,
+    "categoryId": 3,
+    "categoryName": "오리지널",
+    "description": "",
+    "imageUrl": "/images/product15.jpg"
+  },
+  {
+    "id": 16,
+    "name": "수비드 통삼겹 들기름 두부면 막국수",
+    "price": 8900,
+    "categoryId": 3,
+    "categoryName": "오리지널",
+    "description": "",
+    "imageUrl": "/images/product16.jpg"
+  },
+  {
+    "id": 17,
+    "name": "훈제 오리 들깨 크림 리조또",
+    "price": 8900,
+    "categoryId": 3,
+    "categoryName": "오리지널",
+    "description": "",
+    "imageUrl": "/images/product17.jpg"
+  },
+  {
+    "id": 18,
+    "name": "우삼겹 규동 브로콜리",
+    "price": 8900,
+    "categoryId": 3,
+    "categoryName": "오리지널",
+    "description": "",
+    "imageUrl": "/images/product18.jpg"
+  },
+  {
+    "id": 19,
+    "name": "우삼겹 구이 두부면 오일 파스타",
+    "price": 8900,
+    "categoryId": 3,
+    "categoryName": "오리지널",
+    "description": "",
+    "imageUrl": "/images/product19.jpg"
+  },
+  {
+    "id": 20,
+    "name": "BTS & 치킨 치즈 리조또",
+    "price": 8900,
+    "categoryId": 3,
+    "categoryName": "오리지널",
+    "description": "",
+    "imageUrl": "/images/product20.jpg"
+  },
+  {
+    "id": 21,
+    "name": "소고기 버섯 들깨 덮밥",
+    "price": 8900,
+    "categoryId": 3,
+    "categoryName": "오리지널",
+    "description": "",
+    "imageUrl": "/images/product21.jpg"
+  },
+  {
+    "id": 22,
+    "name": "저당 키토 라자냐",
+    "price": 8900,
+    "categoryId": 3,
+    "categoryName": "오리지널",
+    "description": "",
+    "imageUrl": "/images/product22.jpg"
+  },
+  {
+    "id": 23,
+    "name": "강남역 호랑이 삼겹",
+    "price": 9900,
+    "categoryId": 4,
+    "categoryName": "시그니처",
+    "description": "",
+    "imageUrl": "/images/product23.jpg"
+  },
+  {
+    "id": 24,
+    "name": "수원 왕갈비통 닭목살",
+    "price": 9900,
+    "categoryId": 4,
+    "categoryName": "시그니처",
+    "description": "",
+    "imageUrl": "/images/product24.jpg"
+  },
+  {
+    "id": 25,
+    "name": "기사식당 최강 제육",
+    "price": 9900,
+    "categoryId": 4,
+    "categoryName": "시그니처",
+    "description": "",
+    "imageUrl": "/images/product25.jpg"
+  },
+  {
+    "id": 26,
+    "name": "춘천 들깨 닭갈비",
+    "price": 9900,
+    "categoryId": 4,
+    "categoryName": "시그니처",
+    "description": "",
+    "imageUrl": "/images/product26.jpg"
+  },
+  {
+    "id": 27,
+    "name": "수랏간 삼치 솥밥",
+    "price": 9900,
+    "categoryId": 4,
+    "categoryName": "시그니처",
+    "description": "",
+    "imageUrl": "/images/product27.jpg"
+  },
+  {
+    "id": 28,
+    "name": "항아리 차돌 된장",
+    "price": 9900,
+    "categoryId": 4,
+    "categoryName": "시그니처",
+    "description": "",
+    "imageUrl": "/images/product28.jpg"
+  },
+  {
+    "id": 29,
+    "name": "초신선 더클린커피 콜롬비아 수프리모 방탄커피 원두",
+    "price": 21800,
+    "categoryId": 5,
+    "categoryName": "더클린커피",
+    "description": "",
+    "imageUrl": "/images/product29.jpg",
+    "options": {
+      "volume": [
+        {
+          "label": "200g",
+          "price": 21800
+        },
+        {
+          "label": "500g",
+          "price": 37800
+        }
+      ],
+      "grind": [
+        "분쇄안함",
+        "에스프레소(고운분쇄)",
+        "핸드드립(일반분쇄)",
+        "프렌치프레스(굵은분쇄)"
+      ]
+    }
+  },
+  {
+    "id": 30,
+    "name": "초신선 스페셜티 에티오피아 아리차 G1 더클린 커피 예가체프 원두",
+    "price": 21800,
+    "categoryId": 5,
+    "categoryName": "더클린커피",
+    "description": "",
+    "imageUrl": "/images/product30.jpg",
+    "options": {
+      "volume": [
+        {
+          "label": "200g",
+          "price": 21800
+        },
+        {
+          "label": "500g",
+          "price": 37800
+        }
+      ],
+      "grind": [
+        "분쇄안함",
+        "에스프레소(고운분쇄)",
+        "핸드드립(일반분쇄)",
+        "프렌치프레스(굵은분쇄)"
+      ]
+    }
+  },
+  {
+    "id": 31,
+    "name": "곰팡이 독소 없는 더클린 커피 케냐AA 원두 PLUS",
+    "price": 21800,
+    "categoryId": 5,
+    "categoryName": "더클린커피",
+    "description": "",
+    "imageUrl": "/images/product31.jpg",
+    "options": {
+      "volume": [
+        {
+          "label": "200g",
+          "price": 21800
+        },
+        {
+          "label": "500g",
+          "price": 37800
+        }
+      ],
+      "grind": [
+        "분쇄안함",
+        "에스프레소(고운분쇄)",
+        "핸드드립(일반분쇄)",
+        "프렌치프레스(굵은분쇄)"
+      ]
+    }
+  },
+  {
+    "id": 32,
+    "name": "초신선 디카페인 원두 과테말라 안티구아 더클린 커피",
+    "price": 21800,
+    "categoryId": 5,
+    "categoryName": "더클린커피",
+    "description": "",
+    "imageUrl": "/images/product32.jpg",
+    "options": {
+      "volume": [
+        {
+          "label": "200g",
+          "price": 21800
+        },
+        {
+          "label": "500g",
+          "price": 37800
+        }
+      ],
+      "grind": [
+        "분쇄안함",
+        "에스프레소(고운분쇄)",
+        "핸드드립(일반분쇄)",
+        "프렌치프레스(굵은분쇄)"
+      ]
+    }
+  },
+  {
+    "id": 33,
+    "name": "초신선 과테말라 SHB 스페셜티 더클린 커피",
+    "price": 21800,
+    "categoryId": 5,
+    "categoryName": "더클린커피",
+    "description": "",
+    "imageUrl": "/images/product33.jpg",
+    "options": {
+      "volume": [
+        {
+          "label": "200g",
+          "price": 21800
+        },
+        {
+          "label": "500g",
+          "price": 37800
+        }
+      ],
+      "grind": [
+        "분쇄안함",
+        "에스프레소(고운분쇄)",
+        "핸드드립(일반분쇄)",
+        "프렌치프레스(굵은분쇄)"
+      ]
+    }
+  },
+  {
+    "id": 34,
+    "name": "팀키토 이베리코 저당 만두 냉동 굴림 글루텐프리 고기굴림만두 168g",
+    "price": 5900,
+    "categoryId": 6,
+    "categoryName": "헬시푸드",
+    "description": "",
+    "imageUrl": "/images/product34.jpg"
+  },
+  {
+    "id": 35,
+    "name": "[팀키토 x 사노셀] 유기농 애플사이다비니거 스틱 18ml x 20포",
+    "price": 15900,
+    "categoryId": 6,
+    "categoryName": "헬시푸드",
+    "description": "",
+    "imageUrl": "/images/product35.jpg"
+  },
+  {
+    "id": 36,
+    "name": "[팀키토 x 사노셀] 유기농 애플사이다비니거 대용량 1,000ml",
+    "price": 14900,
+    "categoryId": 6,
+    "categoryName": "헬시푸드",
+    "description": "",
+    "imageUrl": "/images/product36.jpg"
+  }
+]

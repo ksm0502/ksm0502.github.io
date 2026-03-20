@@ -1,0 +1,18 @@
+server:
+  port: 8214
+
+spring:
+  application:
+    name: shop
+  datasource:
+    url: jdbc:postgresql://localhost:5432/shop
+    username: postgres
+    password: 1004
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
