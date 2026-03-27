@@ -109,7 +109,7 @@ a { text-decoration: none; color: #333; }
 }
 
 .gnb:hover::before {
-    height: 250px;
+    height: 170px;
 }
 
 .gnb .menu {
@@ -117,7 +117,7 @@ a { text-decoration: none; color: #333; }
     padding: 0 5px;
     margin: 0;
     display: flex;
-    gap: 70px;
+    gap: 50px;
 }
 
 .gnb .menu > li {
@@ -130,6 +130,7 @@ a { text-decoration: none; color: #333; }
     font-weight: 800;
     font-size: 18px;
     padding: 0 10px;
+    white-space: nowrap;
 }
 
 .gnb .menu > li:hover a.dp1 {
@@ -138,22 +139,22 @@ a { text-decoration: none; color: #333; }
 
 .gnb .sub {
     position: absolute;
-    top: 111.33px;
+    top: 65px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
     background-color: #fff;
-    min-width: 120px;
+    min-width: 160px;
     flex-direction: column;
-    transition: 0.6s;
-    height:0px;
-    overflow-y: hidden;
+    transition: max-height 0.6s ease;
+    max-height: 0;
+    overflow: hidden;
     display: flex;
     text-align: center; 
 }
 
 .gnb:hover .menu li .sub {
-    height: 200px;
+    max-height: 400px;
 }
 
 .gnb .menu li:hover .sub {
@@ -161,7 +162,7 @@ a { text-decoration: none; color: #333; }
 }
 
 .gnb .sub li {
-    min-width: 140px;
+    min-width: 160px;
     padding: 6px;
 }
 

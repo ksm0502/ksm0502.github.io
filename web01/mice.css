@@ -13,3 +13,8 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Mice';
+    src: local('Malgun Gothic'), local('맑은 고딕'), local('NanumGothic');
+    unicode-range: U+4E00-U+9FFF, U+3400-U+4DBF, U+F900-U+FAFF;
+}
