@@ -4,27 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 ,maximum-scale=1.0, minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
     <title>청주 문화 관광</title>
-    <!-- 메타포: 바로 가기 아이콘, 홈페이지 제목, 검색어, 설명 -->
     <meta name="keywords" content="청주관광문화, 청주시청 관광문화, 청주시 여행정보, 직지, 상당산성">
     <meta name="description" content="기록문화 창의도시 청주관광문화 홈페이지">
-    <meta name="description" content="청주관광문화 홈페이지">
-    <!-- 오픈 그래프 -->
     <meta property="og:locale" content="ko_KR">
     <meta property="og:type" content="website">
     <meta property="og:title" content="청주시청 관광문화 홈페이지">
     <meta property="og:description" content="청주관광문화 홈페이지">
     <meta property="og:site_name" content="청주관광문화">
-    <meta property="og:url" content="https://okgunyang.github.io/web01">   <!-- 실제 사이트 주소로 변경 -->
+    <meta property="og:url" content="https://okgunyang.github.io/web01">
     <meta property="og:image" content="https://okgunyang.github.io/images/og-image.jpg">
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="청주시청 관광문화 홈페이지">
     <meta name="twitter:description" content="청주관광문화 홈페이지">
     <meta name="twitter:image" content="https://okgunyang.github.io/images/og-image.jpg">
-    <meta name="twitter:site" content="@cjcitynet">   <!-- 공식 계정 있으면 -->
+    <meta name="twitter:site" content="@cjcitynet">
     <!-- 폰트, 초기화(reset.css), 아이콘 셋 -->
     <link rel="stylesheet" href="reset.css">
-    <!-- <link rel="stylesheet" href="normalize.css"> -->
     <link rel="stylesheet" href="mice.css">
     <link rel="stylesheet" href="iconset.css">
     <link rel="stylesheet" href="xeicon.css">
@@ -37,19 +32,120 @@
     h5 { font-weight: 500; font-size:20px; }
     h6 { font-weight: 400; font-size:12px; }
     p { font-family: 'Mice', 'Mice1', serif; font-weight:400; }
-    </style> 
+    </style>
     <link rel="stylesheet" href="cheongju.css">
     <link rel="stylesheet" href="sub_cheongju.css">
     <link rel="stylesheet" href="responsive.css">
     <style>
+    /* 현재 페이지에만 적용되는 스타일 */ 
+    .page_tit_box {
+        border-top:1px solid #bbb;
+        border-right: 1px solid #bbb;
+    }
 
+    .sec_tit {
+        font-size: 20px;
+    }
+
+    .form_wrap {
+        width: 960px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .form1 {
+        width: 1000px;
+        background-color: #ececec;
+        padding: 24px;
+        padding-left: 300px;
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+
+    .txt_ctrl {
+        display:block;
+        width: 80%;
+        line-height: 48px;
+        margin-bottom: 32px;
+        padding-left: 14px;
+    }
+
+    .ctrl_wrap {
+        clear:both;
+    }
+
+    .ctrl_wrap .txt_ctrl {
+        display:inline-block;
+        margin-right: 16px;
+    }
+
+    .ctrl_wrap button {
+        display:inline-block;
+        outline: none;
+        border: none;
+        height: 48px;
+        line-height: 48px;
+        background-color: #2F7D32;
+        color: #fff;
+        border-radius: 6px;
+        padding: 0px 10px;
+    } 
+
+    .btn_con {
+        display: flex;
+        gap: 16px;
+        justify-content: space-between;
+    }
+
+    .btn_ctrl {
+        display: block;
+        border-radius: 8px;
+        line-height: 36px;
+        background-color: #2F7D32;
+        color: #fff;
+        text-align: center;
+        border: none;
+        outline: none;
+        padding: 0 14px;
+        cursor: pointer;
+        padding-left: 28px;
+        background-position: 10px center;
+        background-repeat: no-repeat;
+    }
+
+    .btn_ctrl.login {
+        padding-left: 20px;
+    }
+
+    .btn_ctrl.join {
+        background-image: url("./images/login-icon-mem.png");
+    }
+
+    .btn_ctrl.find {
+        background-image: url("./images/login-icon-search.png");
+    }
+
+    .form_wrap::before {
+        content:"";
+        display: block;
+        width: 140px;
+        height: 140px;
+        background-color: #d0dadd;
+        position: absolute;
+        top: 110px;
+        left: 70px;
+        border-radius: 80px;
+        background-image: url("./images/login-icon-lock.png");
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
     </style>
 </head>
 <body>
 <div class="wrap">
     <header id="hd">
         <div class="container">
-            <a href="index.html" class="logo">
+            <a href="/" class="logo">
                 <img src="./images/logo_cj.png" alt="청주문화관광로고">
             </a>
             <input type="checkbox" id="ck1" class="ck_item">
@@ -96,8 +192,8 @@
                         <ul class="sub">
                             <li><a href="https://ticket.cheongju.go.kr/www/index.do">시티투어신청</a></li>
                             <li><a href="https://parking.cheongju.go.kr/travis/ext/chachacha/ChachachaMain.do">교통정보</a></li>
-                            <li><a href="#">여행사 정보</a></li>
-                            <li><a href="#">관광지도신청</a></li>
+                            <li><a href="sub41.html">여행사 정보</a></li>
+                            <li><a href="sub42.html">관광지도신청</a></li>
                         </ul>
                     </li>
                     <li>
@@ -121,73 +217,50 @@
     </header>
     <main class="content">
         <figure id="vs1">
-            <h2 class="vs_tit">청주여행</h2>
-            <h4 class="vs_sub_tit">청주 속으로~</h4>
+            <h2 class="vs_tit">이용안내</h2>
+            <h4 class="vs_sub_tit">청주 문화관광 회원 서비스</h4>
         </figure>
         <div class="content_wrap">
             <aside id="left_bar">
                 <div class="lnb_tit_box">
-                    <h3 class="lnb_tit">청주여행</h3>
+                    <h3 class="lnb_tit">이용안내</h3>
                 </div>
                 <nav id="lnb">
                     <ul>
-                        <li><a href="sub11.html">역사문화관광</a></li>
-                        <li><a href="sub12.html">교육체험관광</a></li>
-                        <li><a href="sub13.html">생태자연관광</a></li>
-                        <li><a href="sub14.html">농촌체험관광</a></li>
-                        <li><a href="sub15.html">레저관광</a></li>
+                        <li><a href="log.html">로그인</a></li>
+                        <li><a href="join.html" class="active">회원가입</a></li>
+                        <li><a href="promotion.html">회원약관</a></li>
+                        <li><a href="privacy.html">개인정보처리방침</a></li>
                     </ul>
                 </nav>
             </aside>
             <div class="content_art">
                 <div class="page_tit_box">
-                    <h3 class="page_tit">청주여행</h3>
+                    <h3 class="page_tit">회원가입</h3>
                     <p class="breadcrumb"><a href="/">HOME</a> &gt; 
-                        <span>청주여행</span>
-                    </p>
+                        <span>이용안내</span>
+                    &gt; <span>회원가입</span></p>
                 </div>
                 <section class="con">
-                    <h2 class="con_tit">청주여행 안내</h2>
-                    <p class="con_sub_tit">청주의 다채로운 매력을 다섯 가지 테마별로 나누어 소개한다.</p>
+                    <div class="form_wrap">
 
-                    <div class="info_wrap">
-                        <div class="info_content_wrap" style="display: flex; gap: 30px; padding: 20px; border-bottom: 1px solid #eee;">            
-                            <div class="art_img_box" style="width: 40%; flex-shrink: 0;">
-                                <img src="./images/cheongju.jpg" alt="청주 시내 전경" style="width: 100%; border-radius: 5px;">
+                        <h3 class="sec_tit">회원 가입</h3>
+                        <form action="" id="join_form" class="form1">
+                            <div class="ctrl_wrap">
+                                <input type="text" name="id" id="id" class="txt_ctrl" placeholder="아이디" required autofocus>
+                                <button type="button" id="confirm">아이디 중복 확인</button>
+                                <input type="hidden" name="id_ck" id="id_ck">
                             </div>
-                            <div class="art_text_box">
-                                <h3 style="font-size: 24px; color: #2F7D32; margin-bottom: 15px;">기록문화 창의도시, 청주</h3>
-                                <p style="line-height: 1.8; color: #555;">청주여행 탭에서는 역사, 교육, 생태, 농촌, 레저라는 다섯 가지 테마를 통해 청주의 진면목을 발견할 수 있다. 왼쪽 메뉴나 아래의 링크를 클릭하여 각 테마별 상세 정보를 확인할 수 있다.</p>
-                                
-                                <ul style="margin-top: 25px; list-style: none; padding: 0;">
-                                    <li style="margin-bottom: 12px;">
-                                        <a href="sub11.html" style="text-decoration: none; color: #333; font-weight: 500;">
-                                            <span style="color: #2F7D32; margin-right: 8px;">01.</span> 역사문화관광 바로가기 →
-                                        </a>
-                                    </li>
-                                    <li style="margin-bottom: 12px;">
-                                        <a href="sub12.html" style="text-decoration: none; color: #333; font-weight: 500;">
-                                            <span style="color: #2F7D32; margin-right: 8px;">02.</span> 교육체험관광 바로가기 →
-                                        </a>
-                                    </li>
-                                    <li style="margin-bottom: 12px;">
-                                        <a href="sub13.html" style="text-decoration: none; color: #333; font-weight: 500;">
-                                            <span style="color: #2F7D32; margin-right: 8px;">03.</span> 생태자연관광 바로가기 →
-                                        </a>
-                                    </li>
-                                    <li style="margin-bottom: 12px;">
-                                        <a href="sub14.html" style="text-decoration: none; color: #333; font-weight: 500;">
-                                            <span style="color: #2F7D32; margin-right: 8px;">04.</span> 농촌체험관광 바로가기 →
-                                        </a>
-                                    </li>
-                                    <li style="margin-bottom: 12px;">
-                                        <a href="sub15.html" style="text-decoration: none; color: #333; font-weight: 500;">
-                                            <span style="color: #2F7D32; margin-right: 8px;">05.</span> 레저관광 바로가기 →
-                                        </a>
-                                    </li>
-                                </ul>
+                            <input type="password" name="pw" id="pw" class="txt_ctrl" placeholder="비밀번호" required>
+                            <input type="password" name="pw2" id="pw2" class="txt_ctrl" placeholder="비밀번호 확인" required>
+                            <input type="email" name="email" class="txt_ctrl" placeholder="이메일 주소 입력" required>
+                            <input type="tel" name="tel" class="txt_ctrl" placeholder="전화번호 입력" required>
+                            <div class="btn_con">
+                                <button type="submit" class="btn_ctrl join">회원가입</button>
+                                <a href="log.html" class="btn_ctrl login">로그인</a>
+                                <a href="#" class="btn_ctrl find">아이디/비밀번호 찾기</a>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </section>
             </div>
