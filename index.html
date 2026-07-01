@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>김승민 | Backend Developer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#09090b;--fg:#fafafa;--muted:#a1a1aa;--muted2:#71717a;
+  --card:#18181b;--card2:#1f1f23;--border:#2a2a2e;
+  --accent:#6366f1;--accent2:#8b5cf6;--cyan:#06b6d4;--green:#22c55e;--orange:#f97316;
+  --radius:18px;--trans:cubic-bezier(.4,0,.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:'Inter','Noto Sans KR',sans-serif;overflow-x:hidden;line-height:1.6}
+body:before{content:'';position:fixed;inset:0;opacity:.035;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.ambient{position:fixed;border-radius:50%;filter:blur(110px);opacity:.11;pointer-events:none;z-index:0}.amb1{width:560px;height:560px;background:var(--accent);top:-220px;right:-160px}.amb2{width:470px;height:470px;background:var(--cyan);bottom:-180px;left:-160px}.amb3{width:320px;height:320px;background:var(--green);top:42%;left:52%;opacity:.055}
+nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;width:min(980px,calc(100vw - 28px));display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(9,9,11,.78);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:999px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:900;font-size:.95rem;letter-spacing:-.02em}.logo-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--cyan))}.navlinks{display:flex;gap:4px}.navlinks a{color:var(--muted);text-decoration:none;font-size:.8rem;padding:7px 12px;border-radius:999px;transition:.2s}.navlinks a:hover{background:rgba(255,255,255,.07);color:var(--fg)}.nav-cta{color:#fff;text-decoration:none;background:var(--accent);padding:8px 15px;border-radius:999px;font-size:.8rem;font-weight:800}
+section{position:relative;z-index:1;padding:94px 22px}.container{max-width:1120px;margin:0 auto}.eyebrow{font-size:.72rem;font-weight:900;color:#a5b4fc;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}.sec-title{font-size:clamp(2rem,4.8vw,3.4rem);line-height:1.12;font-weight:900;letter-spacing:-.055em;margin-bottom:14px}.sec-sub{color:var(--muted);font-size:.98rem;max-width:650px}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:130px}.hero-inner{max-width:930px}.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(99,102,241,.35);background:rgba(99,102,241,.12);padding:7px 13px;border-radius:999px;color:#c7d2fe;font-size:.78rem;font-weight:700;margin-bottom:28px}.pulse{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 0 6px rgba(34,197,94,.12)}h1{font-size:clamp(3.2rem,8vw,6.7rem);line-height:1.02;letter-spacing:-.075em;font-weight:900;margin-bottom:22px}.g1{background:linear-gradient(135deg,#fff,#a1a1aa);-webkit-background-clip:text;background-clip:text;color:transparent}.g2{background:linear-gradient(135deg,var(--accent),var(--accent2),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{color:var(--muted);font-size:1.08rem;max-width:720px;margin:0 auto 32px}.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:12px;text-decoration:none;font-weight:800;font-size:.9rem;transition:.25s}.btn-primary{background:var(--accent);color:white}.btn-primary:hover{background:var(--accent2);transform:translateY(-2px)}.btn-secondary{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--fg)}.metrics{display:flex;justify-content:center;gap:26px;flex-wrap:wrap}.metric{min-width:120px}.metric strong{display:block;font-size:2rem;letter-spacing:-.05em}.metric span{color:var(--muted2);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:44px}.profile-card{background:linear-gradient(180deg,var(--card),rgba(24,24,27,.72));border:1px solid var(--border);border-radius:24px;padding:30px;overflow:hidden;position:relative}.profile-card:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 10%,rgba(99,102,241,.18),transparent 48%);pointer-events:none}.avatar{width:78px;height:78px;border-radius:20px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent2));font-size:2.2rem;margin-bottom:18px}.name{font-weight:900;font-size:1.22rem}.role{color:var(--muted);font-size:.86rem;margin-bottom:18px}.tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}.tag{padding:5px 10px;border-radius:8px;font-size:.73rem;font-weight:800;background:rgba(255,255,255,.06);border:1px solid var(--border)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:rgba(255,255,255,.045);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center}.stat b{display:block;color:#a5b4fc;font-size:1.2rem}.stat small{color:var(--muted2);font-size:.68rem}.about-text p{color:var(--muted);margin-bottom:14px}.bullets{display:grid;gap:10px;margin-top:20px}.bullet{display:flex;gap:10px;align-items:flex-start;color:#e4e4e7;font-size:.92rem}.bullet:before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:10px;flex:0 0 6px}
+.skills{background:rgba(255,255,255,.015)}.skill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:38px}.skill{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px}.skill h3{font-size:1rem;margin-bottom:8px}.skill p{color:var(--muted);font-size:.86rem;margin-bottom:16px}.chips{display:flex;flex-wrap:wrap;gap:7px}.chip{padding:6px 10px;background:rgba(255,255,255,.055);border:1px solid var(--border);border-radius:8px;font-size:.76rem;font-weight:700;color:#e4e4e7}
+.arch{margin-top:36px;border:1px solid var(--border);border-radius:22px;overflow:hidden;background:var(--card)}.arch-row{display:flex;border-bottom:1px solid var(--border)}.arch-row:last-child{border-bottom:none}.arch-label{width:170px;flex-shrink:0;padding:18px;background:rgba(255,255,255,.035);font-size:.76rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.09em}.arch-cells{padding:14px;display:flex;gap:8px;flex-wrap:wrap}.arch-cell{padding:7px 12px;border-radius:9px;font-size:.78rem;font-weight:800}.front{background:rgba(34,197,94,.11);color:#86efac}.back{background:rgba(99,102,241,.13);color:#c7d2fe}.ai{background:rgba(139,92,246,.14);color:#ddd6fe}.db{background:rgba(249,115,22,.12);color:#fed7aa}.ops{background:rgba(6,182,212,.12);color:#a5f3fc}
+.projects-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;margin-bottom:38px}.featured{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;background:linear-gradient(180deg,var(--card),rgba(24,24,27,.76));border:1px solid rgba(99,102,241,.36);border-radius:26px;padding:32px;margin-bottom:20px}.status{display:inline-flex;align-items:center;gap:7px;background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.3);color:#fed7aa;border-radius:999px;padding:5px 11px;font-size:.72rem;font-weight:900;margin-bottom:14px}.project-title{font-size:1.65rem;font-weight:900;letter-spacing:-.035em;margin-bottom:10px}.project-desc{color:var(--muted);font-size:.93rem;margin-bottom:18px}.project-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.meta{font-size:.72rem;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--border);font-weight:800;color:#e4e4e7}.results{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.result{background:rgba(255,255,255,.045);border:1px solid var(--border);border-radius:14px;padding:13px;text-align:center}.result b{display:block;color:#a5b4fc}.result span{font-size:.68rem;color:var(--muted2);font-weight:800}.project-links{display:flex;gap:8px;flex-wrap:wrap}.project-links a{padding:9px 13px;border-radius:10px;text-decoration:none;color:var(--fg);font-size:.8rem;font-weight:850;background:rgba(255,255,255,.06);border:1px solid var(--border)}.project-links a:first-child{background:var(--accent);border-color:var(--accent);color:white}.visual{min-height:310px;border-radius:22px;background:linear-gradient(135deg,#0f172a,#312e81 48%,#164e63);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}.visual:before{content:'사진/스크린샷 영역';position:absolute;top:14px;left:14px;font-size:.75rem;color:rgba(255,255,255,.55);font-weight:800}.visual-inner{text-align:center}.visual-icon{font-size:4.8rem;margin-bottom:10px}.visual-text{font-size:.9rem;color:#e4e4e7;font-weight:900}.visual-hint{font-size:.75rem;color:rgba(255,255,255,.64);margin-top:5px}.project-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:.25s}.card:hover{transform:translateY(-4px);border-color:rgba(99,102,241,.42)}.thumb{height:145px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}.thumb:after{content:'스크린샷';position:absolute;right:10px;bottom:9px;font-size:.68rem;background:rgba(0,0,0,.35);padding:3px 8px;border-radius:999px;color:rgba(255,255,255,.72)}.t1{background:linear-gradient(135deg,#3b0764,#1e1b4b)}.t2{background:linear-gradient(135deg,#064e3b,#0f766e)}.t3{background:linear-gradient(135deg,#7c2d12,#431407)}.t4{background:linear-gradient(135deg,#0c4a6e,#082f49)}.card-body{padding:18px}.type{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;font-weight:900;margin-bottom:6px}.card h3{font-size:1rem;line-height:1.35;margin-bottom:7px}.card p{color:var(--muted);font-size:.8rem;margin-bottom:13px}.card .chips .chip{font-size:.68rem;padding:4px 7px}
+.photo-guide{background:rgba(255,255,255,.015)}.guide-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:34px}.guide{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px}.guide b{display:block;font-size:.92rem;margin-bottom:8px}.guide p{color:var(--muted);font-size:.8rem}
+.contact{background:linear-gradient(135deg,rgba(99,102,241,.09),rgba(6,182,212,.045))}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:36px}.contact-item{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;text-decoration:none;color:var(--fg);margin-bottom:10px}.ci{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(99,102,241,.13)}.contact-item small{display:block;color:var(--muted2);font-size:.7rem}.mail-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px}.mail-card h3{font-size:1.05rem;margin-bottom:10px}.mail-card p{color:var(--muted);font-size:.9rem;margin-bottom:18px}.mail-card a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:var(--accent);color:#fff;border-radius:12px;padding:13px 18px;font-weight:900;font-size:.9rem}footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32px 22px;color:var(--muted2);font-size:.82rem}.footer-inner{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.reveal{opacity:0;transform:translateY(24px);transition:.65s var(--trans)}.reveal.visible{opacity:1;transform:none}
+@media(max-width:980px){.grid2,.featured,.contact-grid{grid-template-columns:1fr}.project-grid{grid-template-columns:repeat(2,1fr)}.guide-grid{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}.arch-row{display:block}.arch-label{width:100%}}
+@media(max-width:600px){section{padding:76px 18px}.project-grid,.skill-grid,.guide-grid{grid-template-columns:1fr}.metrics{gap:12px}.metric{min-width:95px}.results{grid-template-columns:1fr}.featured{padding:22px}.visual{min-height:240px}}
+
+.visual img,.thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.visual:before{content:none;}
+.thumb:after{content:none;}
+.visual{align-items:stretch;justify-content:stretch;}
+.thumb{overflow:hidden;}
+.status-badge{position:absolute;left:14px;top:14px;background:rgba(249,115,22,.9);color:#fff;border-radius:999px;padding:6px 11px;font-size:.72rem;font-weight:900;z-index:2;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.traffic-visual{min-height:550px;background:#111;}
+.traffic-img{object-fit:contain !important;}
+
+.growth{background:rgba(255,255,255,.018)}
+.growth-road{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:36px}
+.growth-step{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;position:relative;overflow:hidden}
+.growth-step:before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--cyan))}
+.growth-step small{display:block;color:#a5b4fc;font-size:.68rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.growth-step b{display:block;font-size:.95rem;margin-bottom:6px}
+.growth-step p{color:var(--muted);font-size:.79rem;line-height:1.55}
+.role-box{margin-top:14px;padding:14px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.035)}
+.role-box b{display:block;color:#c7d2fe;font-size:.78rem;margin-bottom:6px}
+.role-box p{color:var(--muted);font-size:.82rem;margin:0}
+.period{display:inline-flex;margin-bottom:9px;padding:4px 9px;border-radius:999px;background:rgba(6,182,212,.1);color:#a5f3fc;border:1px solid rgba(6,182,212,.22);font-size:.68rem;font-weight:900}
+.repo-note{display:inline-flex;align-items:center;margin-top:12px;padding:7px 10px;border-radius:10px;background:rgba(255,255,255,.055);border:1px solid var(--border);color:var(--muted);font-size:.72rem;font-weight:800;text-decoration:none}
+.repo-note:hover{color:var(--fg);border-color:rgba(99,102,241,.42)}
+.contact-item.pending{cursor:default;opacity:.72}
+.traffic-visual{min-height:550px;background:#111}
+.traffic-img{object-fit:contain !important}
+@media(max-width:980px){.growth-road{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.growth-road{grid-template-columns:1fr}.traffic-visual{min-height:320px}}
+
+
+/* Large project gallery override */
+.project-grid{
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:26px !important;
+}
+.project-grid .card{
+  display:grid !important;
+  grid-template-columns:minmax(360px, 1.15fr) minmax(320px, .85fr) !important;
+  min-height:330px;
+}
+.project-grid .thumb{
+  height:100% !important;
+  min-height:330px !important;
+  font-size:0 !important;
+  overflow:hidden;
+}
+.project-grid .thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.project-grid .card-body{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:28px !important;
+}
+.project-grid .card h3{
+  font-size:1.35rem !important;
+}
+.project-grid .card p{
+  font-size:.92rem !important;
+}
+@media(max-width:900px){
+  .project-grid .card{
+    grid-template-columns:1fr !important;
+  }
+  .project-grid .thumb{
+    min-height:230px !important;
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="ambient amb1"></div><div class="ambient amb2"></div><div class="ambient amb3"></div>
+<nav>
+  <div class="logo"><span class="logo-dot"></span>Kim Seungmin</div>
+  <div class="navlinks"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a></div>
+  <a class="nav-cta" href="#contact">Contact →</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner reveal">
+    <div class="badge"><span class="pulse"></span>Backend Developer Portfolio · Seoul/Korea</div>
+    <h1><span class="g1">Backend Developer</span><br><span class="g2">with AI Integration</span></h1>
+    <p>Java/Spring Boot 기반 백엔드 개발자를 목표로, 웹 퍼블리싱 → Vue.js 쇼핑몰 → Spring Boot 백엔드 → AI 분석 서버 연동 프로젝트까지 단계적으로 경험을 확장해온 김승민입니다.</p>
+    <div class="btns"><a class="btn btn-primary" href="#projects">🚀 프로젝트 보기</a><a class="btn btn-secondary" href="#skills">🧩 기술 역량</a><a class="btn btn-secondary" href="#contact">📩 연락하기</a></div>
+    <div class="metrics">
+      <div class="metric"><strong>5</strong><span>Projects</span></div>
+      <div class="metric"><strong>40+</strong><span>Traffic APIs</span></div>
+      <div class="metric"><strong>Java 21</strong><span>Main Stack</span></div>
+      <div class="metric"><strong>Spring</strong><span>Backend Core</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="eyebrow reveal">About Me</div>
+    <h2 class="sec-title reveal">데이터를 안정적인 서비스로 연결하는<br>백엔드 개발자</h2>
+    <div class="grid2 reveal">
+      <div class="profile-card">
+        <div class="avatar">🧑‍💻</div>
+        <div class="name">김승민</div>
+        <div class="role">Backend Developer · AI Service Integration</div>
+        <div class="tags"><span class="tag">Spring Boot</span><span class="tag">JPA</span><span class="tag">PostgreSQL</span><span class="tag">JWT</span><span class="tag">FastAPI 연동</span></div>
+        <div class="stats"><div class="stat"><b>5</b><small>Projects</small></div><div class="stat"><b>REST</b><small>API 설계</small></div><div class="stat"><b>AI</b><small>Integration</small></div></div>
+      </div>
+      <div class="about-text">
+        <p>안녕하세요. Java와 Spring Boot 기반의 백엔드 개발자를 목표로 하고 있는 김승민입니다.</p>
+        <p>HTML/CSS 기반 웹 퍼블리싱부터 Vue.js 쇼핑몰 화면 구성, Spring Boot 기반 쇼핑몰 API 개발, 그리고 AI 분석 서버와 연동되는 교통 데이터 백엔드 시스템까지 단계적으로 개발 경험을 쌓아왔습니다.</p>
+        <div class="bullets">
+          <div class="bullet">원본 감지 로그와 OCR 분석 결과를 분리하여 확장 가능한 데이터 구조 설계</div>
+          <div class="bullet">Spring Security와 JWT 기반 인증/인가 구조 구현</div>
+          <div class="bullet">JPA Entity, DTO, Repository, Service, Controller 계층 분리</div>
+          <div class="bullet">Swagger 기반 API 문서화와 프론트엔드 연동 고려</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="skills" id="skills">
+  <div class="container">
+    <div class="eyebrow reveal">Skills</div>
+    <h2 class="sec-title reveal">기술을 나열하기보다,<br>무엇을 구현했는지 보여줍니다</h2>
+    <p class="sec-sub reveal">포트폴리오의 기술 스택은 실제 프로젝트에서 사용한 경험을 기준으로 정리했습니다.</p>
+    <div class="skill-grid reveal">
+      <div class="skill"><h3>⚙️ Backend</h3><p>Spring Boot 기반 REST API 개발, 계층형 구조 설계, 인증/인가, 예외 처리, Validation을 구현합니다.</p><div class="chips"><span class="chip">Java 21</span><span class="chip">Spring Boot 3.x</span><span class="chip">Spring Security</span><span class="chip">JWT</span><span class="chip">JPA</span><span class="chip">Swagger</span></div></div>
+      <div class="skill"><h3>🗄️ Database</h3><p>PostgreSQL 기반 테이블 설계와 JPA 연관관계 매핑, 도메인별 데이터 분리 저장을 경험했습니다.</p><div class="chips"><span class="chip">PostgreSQL</span><span class="chip">Entity 설계</span><span class="chip">Repository</span><span class="chip">Migration SQL</span><span class="chip">ERD</span></div></div>
+      <div class="skill"><h3>🤖 AI Integration</h3><p>AI 모델 자체 개발보다, AI 분석 서버가 생성한 결과를 백엔드 서비스 데이터로 안정적으로 연결하는 데 강점이 있습니다.</p><div class="chips"><span class="chip">FastAPI 연동</span><span class="chip">YOLO 결과 수신</span><span class="chip">OCR 결과 저장</span><span class="chip">OpenCV 산출물 관리</span><span class="chip">Internal API Key</span></div></div>
+      <div class="skill"><h3>🎨 Frontend & Collaboration</h3><p>Vue.js와 HTML/CSS 기반 화면 구현 경험이 있으며, 백엔드 API와 연결되는 사용자 흐름을 이해하고 있습니다.</p><div class="chips"><span class="chip">Vue.js 3</span><span class="chip">Axios</span><span class="chip">HTML5/CSS3</span><span class="chip">Git/GitHub</span><span class="chip">Docker</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="eyebrow reveal">Architecture</div>
+    <h2 class="sec-title reveal">프로젝트에서 사용한 구조</h2>
+    <div class="arch reveal">
+      <div class="arch-row"><div class="arch-label">Frontend</div><div class="arch-cells"><span class="arch-cell front">Vue.js</span><span class="arch-cell front">Axios</span><span class="arch-cell front">HTML/CSS</span><span class="arch-cell front">Dashboard UI</span></div></div>
+      <div class="arch-row"><div class="arch-label">Backend</div><div class="arch-cells"><span class="arch-cell back">Spring Boot</span><span class="arch-cell back">Layered MVC</span><span class="arch-cell back">REST API</span><span class="arch-cell back">JWT Security</span><span class="arch-cell back">Swagger</span></div></div>
+      <div class="arch-row"><div class="arch-label">AI Server</div><div class="arch-cells"><span class="arch-cell ai">FastAPI</span><span class="arch-cell ai">YOLO</span><span class="arch-cell ai">OCR</span><span class="arch-cell ai">OpenCV</span><span class="arch-cell ai">Internal API Key</span></div></div>
+      <div class="arch-row"><div class="arch-label">Database</div><div class="arch-cells"><span class="arch-cell db">PostgreSQL</span><span class="arch-cell db">DetectionLog</span><span class="arch-cell db">AnalysisResult</span><span class="arch-cell db">VehicleFlowEvent</span><span class="arch-cell db">HourlyStat</span></div></div>
+      <div class="arch-row"><div class="arch-label">Infra</div><div class="arch-cells"><span class="arch-cell ops">Docker</span><span class="arch-cell ops">GitHub</span><span class="arch-cell ops">Raspberry Pi</span><span class="arch-cell ops">MQTT</span></div></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="growth" id="growth">
+  <div class="container">
+    <div class="eyebrow reveal">Growth Story</div>
+    <h2 class="sec-title reveal">웹 퍼블리싱에서<br>AI 연동 백엔드까지</h2>
+    <p class="sec-sub reveal">프로젝트는 단순 나열이 아니라, 기술을 단계적으로 확장해온 과정으로 정리했습니다.</p>
+    <div class="growth-road reveal">
+      <div class="growth-step"><small>2026.01 ~ 02</small><b>청주 문화관광</b><p>HTML/CSS 기반 반응형 관광 정보 웹사이트를 구현하며 웹 퍼블리싱과 UI 구조를 학습했습니다.</p></div>
+      <div class="growth-step"><small>2026.02 ~ 03</small><b>부산 문화관광</b><p>팀 협업을 통해 관광 정보 화면을 구성하고, 사용자에게 정보를 전달하는 웹 서비스 흐름을 경험했습니다.</p></div>
+      <div class="growth-step"><small>2026.03 ~ 04</small><b>Ventalize</b><p>Vue.js 기반 쇼핑몰 화면을 구성하며 컴포넌트, 라우팅, API 연동 흐름을 익혔습니다.</p></div>
+      <div class="growth-step"><small>2026.03</small><b>TeamKeto</b><p>Vue 정적 프론트와 Spring Boot, JPA, PostgreSQL 기반 쇼핑몰 API를 구현했습니다.</p></div>
+      <div class="growth-step"><small>2026.04 ~ Present</small><b>Traffic Analytics</b><p>AI 분석 서버와 Spring Boot 백엔드를 연동하며 데이터 수집, 상태 관리, 통계 API를 설계하고 있습니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="projects-head reveal">
+      <div><div class="eyebrow">Projects</div><h2 class="sec-title">대표 프로젝트</h2></div>
+      <p class="sec-sub">대표 프로젝트는 크게 보여주고, 나머지 프로젝트도 실제 화면과 역할 중심으로 정리했습니다.</p>
+    </div>
+    <div class="featured reveal">
+      <div>
+        <div class="status">🚧 In Progress · Team Project · Backend</div><div class="period">2026.04 ~ Present</div>
+        <div class="project-title">차량 흐름 분석 시스템</div>
+        <p class="project-desc">외부 AI 분석 서버가 전달한 차량 감지 로그, OCR 결과, 과속 위반 데이터를 수집하고 PostgreSQL에 저장하는 Spring Boot 기반 교통 데이터 백엔드 시스템입니다.</p>
+        <div class="project-meta"><span class="meta">Java 21</span><span class="meta">Spring Boot 3.5</span><span class="meta">JPA</span><span class="meta">PostgreSQL</span><span class="meta">JWT</span><span class="meta">Swagger</span><span class="meta">Docker</span></div>
+        <div class="results"><div class="result"><b>40+</b><span>API Endpoints</span></div><div class="result"><b>JWT</b><span>Auth/Security</span></div><div class="result"><b>AI</b><span>Server Integration</span></div></div>
+        <div class="bullets"><div class="bullet">DetectionLog와 DetectionAnalysisResult를 분리하여 원본 로그와 분석 결과의 책임을 명확히 구분</div><div class="bullet">OCR_FAILED, DUPLICATE_SKIPPED, FLOW_EVENT_CREATED 상태 기반 처리 흐름 구현</div><div class="bullet">과속 위반 저장, 검토 상태 변경, 시간대별 교통 통계 집계 API 구현</div></div>
+        <div class="role-box"><b>My Role</b><p>Backend Developer · 감지 로그 API, OCR 분석 결과 저장 구조, 과속 위반 관리 API, JWT 인증, Swagger 문서화를 담당했습니다.</p></div><div class="project-links"><a href="https://github.com/angela860807/Traffic_Analytics_Proposal" target="_blank" rel="noopener noreferrer">GitHub Repository</a></div>
+      </div>
+      <div class="visual traffic-visual"><span class="status-badge">🚧 In Progress</span><img class="traffic-img" src="images/portfolio-01.png" alt="차량 흐름 분석 시스템 화면"></div>
+    </div>
+
+    <div class="project-grid reveal">
+      <div class="card"><div class="thumb"><img src="images/portfolio-02.png" alt="Ventalize 쇼핑몰 화면"></div><div class="card-body"><div class="type">Team Project</div><span class="period">2026.03 ~ 04</span><h3>Ventalize 쇼핑몰</h3><p>Vue.js 기반 럭셔리 패션 쇼핑몰 화면 구성 및 팀 협업 프로젝트. 상품, 장바구니, 주문, 관리자 화면 흐름을 경험했습니다.</p><div class="repo-note">Team Repository · Private</div><div class="chips"><span class="chip">Spring Boot</span><span class="chip">Vue.js</span><span class="chip">PostgreSQL</span><span class="chip">Security</span></div></div></div>
+      <div class="card"><div class="thumb"><img src="images/portfolio-03.png" alt="TeamKeto Shop 화면"></div><div class="card-body"><div class="type">Personal Project</div><span class="period">2026.03</span><h3>TeamKeto Shop</h3><p>Vue 정적 프론트와 Spring Boot 백엔드로 구성한 쇼핑몰 프로젝트. 회원, 상품, 장바구니, 주문, 리뷰, 공지/게시판/Q&A API를 구현했습니다.</p><a class="repo-note" href="https://ksm0502.github.io/web04/" target="_blank" rel="noopener noreferrer">프론트 페이지</a><div class="chips"><span class="chip">Spring Boot</span><span class="chip">Vue.js</span><span class="chip">JPA</span><span class="chip">PostgreSQL</span><span class="chip">Security</span></div></div></div>
+      <div class="card"><div class="thumb"><img src="images/portfolio-04.png" alt="부산 문화관광 웹 애플리케이션 화면"></div><div class="card-body"><div class="type">Team Project</div><span class="period">2026.02 ~ 03</span><h3>부산 문화관광 웹 앱</h3><p>팀 협업 기반 관광 정보 웹 프로젝트. 화면 구성과 관광 콘텐츠 UI 구현 경험을 쌓았습니다.</p><div class="repo-note">Team Repository · Private</div><div class="chips"><span class="chip">Spring Boot</span><span class="chip">Thymeleaf</span><span class="chip">Docker</span><span class="chip">PostgreSQL</span></div></div></div>
+      <div class="card"><div class="thumb"><img src="images/portfolio-05.png" alt="청주 문화관광 웹사이트 화면"></div><div class="card-body"><div class="type">Personal Project</div><span class="period">2026.01 ~ 02</span><h3>청주 문화관광 웹사이트</h3><p>HTML/CSS 기반 반응형 관광 정보 웹사이트. 공통 내비게이션과 상세 페이지를 구성하며 웹 퍼블리싱을 학습했습니다.</p><a class="repo-note" href="https://ksm0502.github.io/web01/" target="_blank" rel="noopener noreferrer">프론트 페이지</a><div class="chips"><span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">Responsive</span><span class="chip">Semantic Markup</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="eyebrow reveal">Contact</div>
+    <h2 class="sec-title reveal">함께 일할 백엔드 개발자를 찾고 계신가요?</h2>
+    <div class="contact-grid reveal">
+      <div>
+        <p class="sec-sub" style="margin-bottom:22px">Java/Spring Boot 기반 백엔드 개발자로 성장하고 있습니다. 채용 문의나 프로젝트 관련 연락을 환영합니다.</p>
+        <a class="contact-item" href="mailto:smn1297@gmail.com"><span class="ci">✉️</span><span><small>Email</small>smn1297@gmail.com</span></a>
+        <a class="contact-item" href="https://github.com/ksm0502" target="_blank" rel="noopener noreferrer"><span class="ci">🐙</span><span><small>GitHub</small>github.com/ksm0502</span></a>
+        <div class="contact-item pending"><span class="ci">📒</span><span><small>Notion</small>자료 정리 중</span></div>
+        <div class="contact-item pending"><span class="ci">📄</span><span><small>Resume</small>PDF 준비 중</span></div>
+      </div>
+      <div class="mail-card">
+        <h3>메일로 바로 연락하기</h3>
+        <p>현재 포트폴리오 페이지에서는 별도 서버 없이 이메일과 GitHub 중심으로 연락 채널을 정리했습니다.</p>
+        <a href="mailto:smn1297@gmail.com?subject=%EA%B9%80%EC%8A%B9%EB%AF%BC%20%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4%20%EB%AC%B8%EC%9D%98">이메일 작성하기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="footer-inner"><span>© 2026 김승민 Portfolio</span><span>Backend Developer with AI Integration</span></div></footer>
+<script>
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

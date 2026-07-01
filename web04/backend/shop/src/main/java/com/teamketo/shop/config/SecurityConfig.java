@@ -57,7 +57,7 @@ public class SecurityConfig {
                         .requestMatchers("/manager/**")
                         .hasAnyRole("MANAGER", "ADMIN")
                         //최고 관리자
-                        .requestMatchers("/admin/**", "/api/products/admin/**")
+                        .requestMatchers("/admin/**", "/api/products/admin/**", "/api/qna/answer/**")
                         .hasRole("ADMIN")
                         //나머지는 로그인 필요
                         .anyRequest()
