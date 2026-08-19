@@ -14,7 +14,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--fg);font-family:'Inter','Noto Sans KR',sans-serif;overflow-x:hidden;line-height:1.6}
+body{background:var(--bg);color:var(--fg);font-family:'Inter','Noto Sans KR',sans-serif;overflow-x:hidden;line-height:1.6;word-break:keep-all;overflow-wrap:break-word}
 body:before{content:'';position:fixed;inset:0;opacity:.035;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .ambient{position:fixed;border-radius:50%;filter:blur(110px);opacity:.11;pointer-events:none;z-index:0}.amb1{width:560px;height:560px;background:var(--accent);top:-220px;right:-160px}.amb2{width:470px;height:470px;background:var(--cyan);bottom:-180px;left:-160px}.amb3{width:320px;height:320px;background:var(--green);top:42%;left:52%;opacity:.055}
 nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;width:min(980px,calc(100vw - 28px));display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(9,9,11,.78);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:999px}
@@ -54,6 +54,7 @@ section{position:relative;z-index:1;padding:94px 22px}.container{max-width:1120p
 .repo-note{display:inline-flex;align-items:center;margin-top:12px;padding:7px 10px;border-radius:10px;background:rgba(255,255,255,.055);border:1px solid var(--border);color:var(--muted);font-size:.72rem;font-weight:800;text-decoration:none}
 .repo-note:hover{color:var(--fg);border-color:rgba(99,102,241,.42)}
 .contact-item.pending{cursor:default;opacity:.72}
+.pending-link{opacity:.55;cursor:default;pointer-events:none}
 .traffic-visual{min-height:550px;background:#111}
 .traffic-img{object-fit:contain !important}
 @media(max-width:980px){.growth-road{grid-template-columns:repeat(2,1fr)}}
@@ -107,7 +108,7 @@ section{position:relative;z-index:1;padding:94px 22px}.container{max-width:1120p
 
 /* Description line-break tuning */
 .desc-break{display:block}
-@media(max-width:600px){.desc-break{display:inline}}
+@media(max-width:600px){.desc-break{display:none}}
 .project-desc{line-height:1.75}
 .card p{line-height:1.7}
 .role-box p{line-height:1.75}
@@ -235,8 +236,8 @@ section{position:relative;z-index:1;padding:94px 22px}.container{max-width:1120p
             <div class="bullet">OCR_FAILED, DUPLICATE_SKIPPED, FLOW_EVENT_CREATED 상태 기반 처리 흐름 구현</div>
             <div class="bullet">과속 위반 저장, 검토 상태 변경, 시간대별 교통 통계 집계 API 구현</div>
           </div>
-          <div class="role-box"><b>My Role · Backend</b><p>팀 프로젝트에서 백엔드 부분을 담당했습니다.<br class="desc-break">감지 로그 API, OCR 분석 결과 저장 구조, 과속 위반 관리 API, JWT 인증, Swagger 문서화를 구현했습니다.<br class="desc-break">관련 산출물과 실제 구현 코드는 아래 Repository에서 확인할 수 있습니다.</p></div>
-          <div class="project-links"><a href="https://github.com/angela860807/Traffic_Analytics_Proposal" target="_blank" rel="noopener noreferrer">GitHub Repository</a></div>
+          <div class="role-box"><b>My Role · Backend</b><p>팀 프로젝트에서 백엔드 부분을 담당했습니다.<br class="desc-break">감지 로그 API, OCR 분석 결과 저장 구조, 과속 위반 관리 API, JWT 인증, Swagger 문서화를 구현했습니다.</p></div>
+          <div class="project-links"><a class="pending-link">프론트 페이지</a></div>
         </div>
         <div class="visual traffic-visual"><span class="status-badge">✅ Completed</span><img class="traffic-img" src="images/tas.png" alt="차량 흐름 분석 시스템 화면"></div>
       </div>
@@ -259,7 +260,7 @@ section{position:relative;z-index:1;padding:94px 22px}.container{max-width:1120p
       <div class="group-title"><span class="group-icon">🤝</span>팀 프로젝트</div>
       <p class="group-sub">팀 협업, 프론트엔드와 백엔드 연동, 서비스 흐름을 경험한 프로젝트입니다.</p>
       <div class="project-grid">
-        <div class="card"><div class="thumb"><img src="images/ventalize.png" alt="Ventalize 쇼핑몰 화면"></div><div class="card-body"><div class="type">Team Project</div><span class="period">2026.03 ~ 04</span><h3>Ventalize 쇼핑몰</h3><p>Vue.js 기반 럭셔리 패션 쇼핑몰 화면 구성 및 팀 협업 프로젝트.<br class="desc-break">상품, 장바구니, 주문, 관리자 화면 흐름을 경험했습니다.</p><a class="repo-note" href="https://github.com/ajh0105/layer_4_ventalize" target="_blank" rel="noopener noreferrer">Team Repository</a><div class="chips"><span class="chip">Spring Boot</span><span class="chip">Vue.js</span><span class="chip">PostgreSQL</span><span class="chip">Security</span></div></div></div>
+        <div class="card"><div class="thumb"><img src="images/ventalize.png" alt="Ventalize 쇼핑몰 화면"></div><div class="card-body"><div class="type">Team Project</div><span class="period">2026.03 ~ 04</span><h3>Ventalize 쇼핑몰</h3><p>Vue.js 기반 럭셔리 패션 쇼핑몰 화면 구성 및 팀 협업 프로젝트.<br class="desc-break">상품, 장바구니, 주문, 관리자 화면 흐름을 경험했습니다.</p><a class="repo-note pending-link">프론트 페이지</a><div class="chips"><span class="chip">Spring Boot</span><span class="chip">Vue.js</span><span class="chip">PostgreSQL</span><span class="chip">Security</span></div></div></div>
         <div class="card"><div class="thumb"><img src="images/busan.png" alt="부산 문화관광 웹 애플리케이션 화면"></div><div class="card-body"><div class="type">Team Project</div><span class="period">2026.02 ~ 03</span><h3>부산 문화관광 웹 앱</h3><p>팀 협업 기반 관광 정보 웹 프로젝트.<br class="desc-break">화면 구성과 관광 콘텐츠 UI 구현 경험을 쌓았습니다.</p><a class="repo-note" href="https://busanculture.simon-portfolio.site/" target="_blank" rel="noopener noreferrer">배포 페이지</a><div class="chips"><span class="chip">Spring Boot</span><span class="chip">Thymeleaf</span><span class="chip">Docker</span><span class="chip">PostgreSQL</span></div></div></div>
       </div>
     </div>
