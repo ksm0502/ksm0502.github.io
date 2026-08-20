@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
@@ -14,7 +14,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--fg);font-family:'Inter','Noto Sans KR',sans-serif;overflow-x:hidden;line-height:1.6;word-break:keep-all;overflow-wrap:break-word}
+body{background:var(--bg);color:var(--fg);font-family:'Inter','Noto Sans KR',sans-serif;overflow-x:hidden;line-height:1.6;word-break:keep-all;overflow-wrap:normal}
 body:before{content:'';position:fixed;inset:0;opacity:.035;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .ambient{position:fixed;border-radius:50%;filter:blur(110px);opacity:.11;pointer-events:none;z-index:0}.amb1{width:560px;height:560px;background:var(--accent);top:-220px;right:-160px}.amb2{width:470px;height:470px;background:var(--cyan);bottom:-180px;left:-160px}.amb3{width:320px;height:320px;background:var(--green);top:42%;left:52%;opacity:.055}
 nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;width:min(980px,calc(100vw - 28px));display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(9,9,11,.78);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:999px}
@@ -112,6 +112,10 @@ section{position:relative;z-index:1;padding:94px 22px}.container{max-width:1120p
 .project-desc{line-height:1.75}
 .card p{line-height:1.7}
 .role-box p{line-height:1.75}
+/* Keep Korean words intact while allowing long technical labels to wrap. */
+p,.bullet,.project-desc,.card p,.role-box p,.sec-sub,.growth-step p{word-break:keep-all;overflow-wrap:normal}
+.chip,.meta,.arch-cell,.tag,.project-title,.card h3{overflow-wrap:anywhere}
+.card-body,.about-text,.skill,.role-box,.growth-step,.project-copy{min-width:0}
 </style>
 </head>
 <body>
@@ -154,13 +158,13 @@ section{position:relative;z-index:1;padding:94px 22px}.container{max-width:1120p
         <div class="stats"><div class="stat"><b>6</b><small>Projects</small></div><div class="stat"><b>REST</b><small>API 설계</small></div><div class="stat"><b>DB</b><small>Data Modeling</small></div></div>
       </div>
       <div class="about-text">
-        <p>안녕하세요. Java와 Spring Boot를 중심으로 REST API와 데이터 처리 서비스를 구현해온 개발자 김승민입니다.</p>
-        <p>HTML/CSS 기반 웹 퍼블리싱부터 Vue.js 쇼핑몰 화면 구성, Spring Boot 기반 쇼핑몰 API 개발, 외부 분석 서버 결과를 수신·저장하는 교통 데이터 백엔드 시스템, Hugging Face Spaces 챗봇 배포까지 단계적으로 개발 경험을 쌓아왔습니다.</p>
+        <p>교통·쇼핑몰 프로젝트를 통해 REST API 설계, PostgreSQL 데이터 모델링, JWT 인증/인가와 외부 시스템 연동을 경험했습니다.</p>
+        <p>기능 구현에 그치지 않고 데이터의 책임을 분리하고 유지보수 가능한 구조를 만드는 백엔드 개발을 지향합니다.</p>
         <div class="bullets">
           <div class="bullet">원본 감지 로그와 OCR 분석 결과를 분리하여 확장 가능한 데이터 구조 설계</div>
           <div class="bullet">Spring Security와 JWT 기반 인증/인가 구조 구현</div>
           <div class="bullet">JPA Entity, DTO, Repository, Service, Controller 계층 분리</div>
-          <div class="bullet">Swagger 기반 API 문서화와 프론트엔드 연동 고려</div>
+          <div class="bullet">Swagger API 문서화 및 프론트엔드 연동 고려</div>
         </div>
       </div>
     </div>
@@ -184,13 +188,14 @@ section{position:relative;z-index:1;padding:94px 22px}.container{max-width:1120p
 <section id="architecture">
   <div class="container">
     <div class="eyebrow reveal">Architecture</div>
-    <h2 class="sec-title reveal">프로젝트에서 사용한 구조</h2>
+    <h2 class="sec-title reveal">TAS 데이터 처리 흐름</h2>
+    <p class="sec-sub reveal">외부 분석 결과가 백엔드 API를 거쳐 저장·검토·통계 데이터로 확장되는 흐름을 중심으로 구성했습니다.</p>
     <div class="arch reveal">
-      <div class="arch-row"><div class="arch-label">Frontend</div><div class="arch-cells"><span class="arch-cell front">Vue.js</span><span class="arch-cell front">Axios</span><span class="arch-cell front">HTML/CSS</span><span class="arch-cell front">Dashboard UI</span></div></div>
-      <div class="arch-row"><div class="arch-label">Backend</div><div class="arch-cells"><span class="arch-cell back">Spring Boot</span><span class="arch-cell back">Layered MVC</span><span class="arch-cell back">REST API</span><span class="arch-cell back">JWT Security</span><span class="arch-cell back">Swagger</span></div></div>
-      <div class="arch-row"><div class="arch-label">External API</div><div class="arch-cells"><span class="arch-cell ai">FastAPI 결과 연동</span><span class="arch-cell ai">OCR 데이터 수신</span><span class="arch-cell ai">분석 상태값 처리</span><span class="arch-cell ai">Internal API Key</span></div></div>
-      <div class="arch-row"><div class="arch-label">Database</div><div class="arch-cells"><span class="arch-cell db">PostgreSQL</span><span class="arch-cell db">DetectionLog</span><span class="arch-cell db">AnalysisResult</span><span class="arch-cell db">Violation</span><span class="arch-cell db">Statistics</span></div></div>
-      <div class="arch-row"><div class="arch-label">Collaboration</div><div class="arch-cells"><span class="arch-cell ops">Docker</span><span class="arch-cell ops">GitHub</span><span class="arch-cell ops">Team Integration</span></div></div>
+      <div class="arch-row"><div class="arch-label">Input</div><div class="arch-cells"><span class="arch-cell front">Vehicle Detection</span><span class="arch-cell front">OCR Result</span><span class="arch-cell front">Traffic Event</span></div></div>
+      <div class="arch-row"><div class="arch-label">Analysis</div><div class="arch-cells"><span class="arch-cell ai">FastAPI Analysis Server</span><span class="arch-cell ai">Internal API Key</span><span class="arch-cell ai">Result Payload</span></div></div>
+      <div class="arch-row"><div class="arch-label">Backend</div><div class="arch-cells"><span class="arch-cell back">Spring Boot REST API</span><span class="arch-cell back">JWT Security</span><span class="arch-cell back">Validation</span><span class="arch-cell back">Service Layer</span></div></div>
+      <div class="arch-row"><div class="arch-label">Domain</div><div class="arch-cells"><span class="arch-cell db">DetectionLog</span><span class="arch-cell db">DetectionAnalysisResult</span><span class="arch-cell db">Violation</span><span class="arch-cell db">Statistics</span></div></div>
+      <div class="arch-row"><div class="arch-label">Storage</div><div class="arch-cells"><span class="arch-cell ops">PostgreSQL</span><span class="arch-cell ops">Status-based Review</span><span class="arch-cell ops">Dashboard API</span></div></div>
     </div>
   </div>
 </section>
@@ -231,12 +236,12 @@ section{position:relative;z-index:1;padding:94px 22px}.container{max-width:1120p
           <div class="project-meta"><span class="meta">Java 21</span><span class="meta">Spring Boot 3.5</span><span class="meta">JPA</span><span class="meta">PostgreSQL</span><span class="meta">JWT</span><span class="meta">Swagger</span><span class="meta">Docker</span></div>
           <div class="results"><div class="result"><b>40+</b><span>API Endpoints</span></div><div class="result"><b>JWT</b><span>Auth/Security</span></div><div class="result"><b>API</b><span>External Integration</span></div></div>
           <div class="bullets">
-            <div class="bullet">DetectionLog와 DetectionAnalysisResult를 분리하여 원본 로그와 분석 결과의 책임을 명확히 구분</div>
-            <div class="bullet">원본 감지 데이터와 분석 결과를 분리하여 데이터 확장성과 유지보수성을 고려한 구조로 설계</div>
+            <div class="bullet">DetectionLog와 DetectionAnalysisResult를 분리하여 원본 데이터 보존과 분석 결과 확장을 고려한 데이터 구조 설계</div>
+            <div class="bullet">Internal API Key 기반으로 외부 분석 서버 요청을 검증하고 Spring Security/JWT 인증 구조 구현</div>
             <div class="bullet">OCR_FAILED, DUPLICATE_SKIPPED, FLOW_EVENT_CREATED 상태 기반 처리 흐름 구현</div>
             <div class="bullet">과속 위반 저장, 검토 상태 변경, 시간대별 교통 통계 집계 API 구현</div>
           </div>
-          <div class="role-box"><b>My Role · Backend</b><p>팀 프로젝트에서 백엔드 부분을 담당했습니다.<br class="desc-break">감지 로그 API, OCR 분석 결과 저장 구조, 과속 위반 관리 API, JWT 인증, Swagger 문서화를 구현했습니다.</p></div>
+          <div class="role-box"><b>My Role · Backend</b><p>팀 프로젝트에서 백엔드 부분을 담당했습니다.<br class="desc-break">감지 로그 API, OCR 결과 저장 구조, 과속 위반 관리 API, JWT 인증과 Swagger 문서화를 담당했습니다.</p></div>
           <div class="project-links">
             <a class="repo-note" href="./tas/index.html" target="_blank" rel="noopener noreferrer">프론트 페이지</a>
           </div>
@@ -262,7 +267,7 @@ section{position:relative;z-index:1;padding:94px 22px}.container{max-width:1120p
       <div class="group-title"><span class="group-icon">🤝</span>팀 프로젝트</div>
       <p class="group-sub">팀 협업, 프론트엔드와 백엔드 연동, 서비스 흐름을 경험한 프로젝트입니다.</p>
       <div class="project-grid">
-        <div class="card"><div class="thumb"><img src="images/ventalize.png" alt="Ventalize 쇼핑몰 화면"></div><div class="card-body"><div class="type">Team Project</div><span class="period">2026.03 ~ 04</span><h3>Ventalize 쇼핑몰</h3><p>Vue.js 기반 럭셔리 패션 쇼핑몰 화면 구성 및 팀 협업 프로젝트.<br class="desc-break">상품, 장바구니, 주문, 관리자 화면 흐름을 경험했습니다.</p><a class="repo-note" href="./ventalize/index.html" target="_blank" rel="noopener noreferrer">프론트 페이지</a><div class="chips"><span class="chip">Spring Boot</span><span class="chip">Vue.js</span><span class="chip">PostgreSQL</span><span class="chip">Security</span></div></div></div>
+        <div class="card"><div class="thumb"><img src="images/ventalize.png" alt="Ventalize 쇼핑몰 화면"></div><div class="card-body"><div class="type">Team Project</div><span class="period">2026.03 ~ 04</span><h3>Ventalize 쇼핑몰</h3><p>Vue.js 기반 럭셔리 패션 쇼핑몰 팀 프로젝트.<br class="desc-break">상품 탐색부터 장바구니·주문·관리자 화면으로 이어지는 사용자 흐름을 구현했습니다.</p><a class="repo-note" href="./ventalize/index.html" target="_blank" rel="noopener noreferrer">프론트 페이지</a><div class="chips"><span class="chip">Spring Boot</span><span class="chip">Vue.js</span><span class="chip">PostgreSQL</span><span class="chip">Security</span></div></div></div>
         <div class="card"><div class="thumb"><img src="images/busan.png" alt="부산 문화관광 웹 애플리케이션 화면"></div><div class="card-body"><div class="type">Team Project</div><span class="period">2026.02 ~ 03</span><h3>부산 문화관광 웹 앱</h3><p>팀 협업 기반 관광 정보 웹 프로젝트.<br class="desc-break">화면 구성과 관광 콘텐츠 UI 구현 경험을 쌓았습니다.</p><a class="repo-note" href="https://busanculture.simon-portfolio.site/" target="_blank" rel="noopener noreferrer">프론트 페이지</a><div class="chips"><span class="chip">Spring Boot</span><span class="chip">Thymeleaf</span><span class="chip">Docker</span><span class="chip">PostgreSQL</span></div></div></div>
       </div>
     </div>
@@ -307,9 +312,3 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
-
-
-
-
-
-
