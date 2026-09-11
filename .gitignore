@@ -1,2 +1,12 @@
 chrome-debug-profile/
+# Local environment files
+.env
+.env.*
+!.env.example
+application-local.yml
+application-local.yaml
+application-local.properties
+**/application-local.yml
+**/application-local.yaml
+**/application-local.properties
 

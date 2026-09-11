@@ -491,14 +491,7 @@
     .box_lst .box_item_tit {
         font-size: 13px;
     }
-
-
-
-
     /* 푸터 영역 */
-    #ft {
-        background-image: url("./images/ft_bg2.png");
-    }
     #ft .container {
         width: 100%;
         padding: 0 12px;
@@ -557,8 +550,11 @@
     }
 
     #banner_bar ul li a img {
-        width: 100%;
+        width: auto;
+        max-width: 100%;
+        max-height: 40px;
         height: auto;
+        margin: 0 auto;
     }
 
     /* 하단 메뉴 */
@@ -599,4 +595,105 @@
     .copyright {
         padding: 8px;
     }  */
+}
+/* 청주 메인 슬라이드 모바일 표시 보정 */
+@media (max-width: 1024px) {
+    #vs img {
+        height: 420px;
+    }
+
+    #vs .tit_box {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        box-sizing: border-box;
+        padding: 0 20px;
+    }
+
+    #vs .tit_box h3 {
+        font-size: 48px;
+        line-height: 1.2;
+    }
+}
+
+@media (max-width: 767px) {
+    #vs img {
+        height: 260px;
+        object-fit: cover;
+    }
+
+    #vs .tit_box h3 {
+        font-size: 28px;
+        line-height: 1.25;
+    }
+
+    #vs .tit_box a {
+        width: 110px;
+        line-height: 38px;
+        font-size: 14px;
+        margin-top: 16px;
+    }
+
+    #vs .btn_box {
+        bottom: 8px;
+    }
+}
+
+/* 청주 모바일 헤더 표시 보정 */
+@media (max-width: 767px) {
+    #hd .container {
+        width: 100%;
+        height: auto;
+        min-height: 72px;
+        padding: 12px 16px;
+        position: relative;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0;
+    }
+
+    .logo {
+        display: block;
+        line-height: 0;
+    }
+
+    .logo img {
+        height: 42px;
+    }
+
+    #smart {
+        top: 16px;
+        right: 16px;
+    }
+
+    .tnb {
+        order: 2;
+        width: 100%;
+        justify-content: flex-start;
+        gap: 10px;
+        padding-top: 10px;
+        padding-right: 44px;
+    }
+
+    .tnb a {
+        padding: 0;
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .gnb {
+        order: 3;
+        width: 100%;
+        margin-top: 0;
+    }
+
+    #ck1:not(:checked) ~ .gnb {
+        margin-top: 0;
+    }
+
+    #ck1:checked ~ .gnb {
+        height: auto;
+        margin-top: 12px;
+    }
 }

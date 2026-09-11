@@ -139,7 +139,70 @@
         background-repeat: no-repeat;
         background-position: center center;
     }
-    </style>
+    
+    /* 이용안내 계정/약관 모바일 보정 */
+    @media (max-width: 767px) {
+        #lnb {
+            min-height: auto;
+        }
+
+        .form_wrap {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+        }
+
+        .form_wrap::before {
+            display: none;
+        }
+
+        .form1,
+        .form_con {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 20px 16px;
+        }
+
+        .form_con {
+            height: 360px !important;
+            overflow-y: auto;
+        }
+
+        .txt_ctrl {
+            width: 100%;
+            box-sizing: border-box;
+            line-height: 42px;
+            margin-bottom: 14px;
+        }
+
+        .ctrl_wrap .txt_ctrl,
+        .ctrl_wrap button {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+
+        .btn_con {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn_ctrl {
+            width: 100%;
+            box-sizing: border-box;
+            line-height: 42px;
+            padding-left: 14px;
+            background-image: none !important;
+        }
+
+        .check_group {
+            height: auto;
+            line-height: 1.6;
+        }
+    }
+</style>
 </head>
 <body>
 <div class="wrap">

@@ -191,6 +191,48 @@
         color: #888;
         text-align: right;
     }
+
+    /* contact 모바일 보정 */
+    @media (max-width: 767px) {
+        .contact_wrap {
+            display: block;
+            padding: 24px 0 40px;
+        }
+
+        .contact_info,
+        .contact_map {
+            min-width: 0;
+            width: 100%;
+        }
+
+        .contact_info {
+            margin-bottom: 32px;
+        }
+
+        .contact_item {
+            gap: 12px;
+            padding: 14px 0;
+        }
+
+        .contact_icon {
+            width: 38px;
+            height: 38px;
+            font-size: 18px;
+        }
+
+        .sns_links {
+            flex-wrap: wrap;
+        }
+
+        .map_frame {
+            height: 300px;
+        }
+
+        .map_addr {
+            text-align: left;
+            line-height: 1.5;
+        }
+    }
     </style>
 </head>
 <body>

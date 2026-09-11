@@ -219,6 +219,8 @@ spring:
     password: ${DB_PASSWORD}
 ```
 
+환경변수에는 실제 값 대신 로컬 환경에 맞는 값을 설정합니다. 예: DB_USERNAME=your_username, DB_PASSWORD=your_password.
+
 초기 데이터가 필요하면 `backend/shop/중요파일/shop.sql`을 PostgreSQL에 실행합니다.
 
 ### 백엔드 실행
