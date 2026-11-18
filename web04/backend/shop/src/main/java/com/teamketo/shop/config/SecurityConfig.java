@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,12 +28,22 @@ public class SecurityConfig {
                 .cors(cors -> {})
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        // 관리자 API는 상품·주문·리뷰의 공통 경로보다 먼저 검사
+                        .requestMatchers(
+                                "/admin/**",
+                                "/api/products/admin/**",
+                                "/api/orders/admin/**",
+                                "/api/reviews/admin/**",
+                                "/api/qna/answer/**"
+                        )
+                        .hasRole("ADMIN")
                         //모든 사용자 접근 가능
+                        .requestMatchers(HttpMethod.GET, "/api/products/**")
+                        .permitAll()
                         .requestMatchers(
                                 "/", "/signup", "/login",
                                 "/css/**", "/js/**", "/images/**", "/uploads/**",
                                 "/member/me",               // 세션 복원용
-                                "/api/products/**",         // 상품 목록/상세
                                 "/api/qna/list",            // 전체 Q&A 목록
                                 "/api/qna/search",          // Q&A 검색
                                 "/api/qna/detail/**",       // Q&A 상세
@@ -56,9 +67,6 @@ public class SecurityConfig {
                         //중간 관리자 이상
                         .requestMatchers("/manager/**")
                         .hasAnyRole("MANAGER", "ADMIN")
-                        //최고 관리자
-                        .requestMatchers("/admin/**", "/api/products/admin/**", "/api/qna/answer/**")
-                        .hasRole("ADMIN")
                         //나머지는 로그인 필요
                         .anyRequest()
                         .authenticated()

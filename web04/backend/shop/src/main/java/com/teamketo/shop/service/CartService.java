@@ -7,8 +7,10 @@ import com.teamketo.shop.repository.CartItemRepository;
 import com.teamketo.shop.repository.MemberRepository;
 import com.teamketo.shop.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -50,20 +52,26 @@ public class CartService {
 
     // 수량 변경
     @Transactional
-    public CartItem updateQuantity(Long cartItemId, Integer quantity) {
-        CartItem item = cartItemRepository.findById(cartItemId)
-                .orElseThrow(() -> new RuntimeException("장바구니 항목을 찾을 수 없습니다."));
+    public CartItem updateQuantity(Long cartItemId, Long memberId, Integer quantity) {
+        CartItem item = getCartItem(cartItemId, memberId);
         item.setQuantity(quantity);
         return cartItemRepository.save(item);
     }
 
     // 장바구니 단건 삭제
-    public void deleteCartItem(Long cartItemId) {
-        cartItemRepository.deleteById(cartItemId);
+    @Transactional
+    public void deleteCartItem(Long cartItemId, Long memberId) {
+        cartItemRepository.delete(getCartItem(cartItemId, memberId));
     }
 
     // 장바구니 전체 삭제 (주문 완료 후)
+    @Transactional
     public void clearCart(Long memberId) {
         cartItemRepository.deleteByMemberId(memberId);
+    }
+
+    private CartItem getCartItem(Long cartItemId, Long memberId) {
+        return cartItemRepository.findByIdAndMemberId(cartItemId, memberId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "장바구니 항목을 찾을 수 없습니다."));
     }
 }

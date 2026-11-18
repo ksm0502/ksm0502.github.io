@@ -4,6 +4,7 @@ import com.teamketo.shop.entity.Member;
 import com.teamketo.shop.entity.Role;
 import com.teamketo.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,19 @@ public class MemberService {
     public Member findByEmail(String email) {
         return memberRepository.findByEmail(email).orElseThrow(() ->
                 new RuntimeException("회원이 존재하지 않습니다."));
+    }
+
+    public Member requireCurrentMember(String email) {
+        return memberRepository.findByEmail(email)
+                .orElseThrow(() -> new AccessDeniedException("로그인한 회원을 찾을 수 없습니다."));
+    }
+
+    public Member requireOwnMember(String email, Long memberId) {
+        Member currentMember = requireCurrentMember(email);
+        if (!currentMember.getId().equals(memberId)) {
+            throw new AccessDeniedException("본인 회원 정보만 사용할 수 있습니다.");
+        }
+        return currentMember;
     }
 
     //회원 목록 조회(관리자)

@@ -8,8 +8,11 @@ import com.teamketo.shop.repository.OrderItemRepository;
 import com.teamketo.shop.repository.ProductRepository;
 import com.teamketo.shop.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -31,7 +34,7 @@ public class ReviewService {
                 .stream()
                 .anyMatch(item -> item.getOrder().getMember().getId().equals(memberId));
         if (!hasPurchased) {
-            throw new RuntimeException("구매한 상품에만 리뷰를 작성할 수 있습니다.");
+            throw new AccessDeniedException("구매한 상품에만 리뷰를 작성할 수 있습니다.");
         }
 
         // 중복 리뷰 확인
@@ -65,10 +68,9 @@ public class ReviewService {
     // 리뷰 수정
     @Transactional
     public Review updateReview(Long reviewId, Long memberId, Integer rating, String content) {
-        Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new RuntimeException("리뷰를 찾을 수 없습니다."));
+        Review review = getReview(reviewId);
         if (!review.getMember().getId().equals(memberId)) {
-            throw new RuntimeException("수정 권한이 없습니다.");
+            throw new AccessDeniedException("수정 권한이 없습니다.");
         }
         review.setRating(rating);
         review.setContent(content);
@@ -78,16 +80,20 @@ public class ReviewService {
     // 리뷰 삭제 (본인 또는 관리자)
     @Transactional
     public void deleteReview(Long reviewId, Long memberId, boolean isAdmin) {
-        Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new RuntimeException("리뷰를 찾을 수 없습니다."));
+        Review review = getReview(reviewId);
         if (!isAdmin && !review.getMember().getId().equals(memberId)) {
-            throw new RuntimeException("삭제 권한이 없습니다.");
+            throw new AccessDeniedException("삭제 권한이 없습니다.");
         }
-        reviewRepository.deleteById(reviewId);
+        reviewRepository.delete(review);
     }
 
     // 전체 리뷰 목록 (관리자)
     public List<Review> getAllReviews() {
         return reviewRepository.findAllByOrderByCreatedAtDesc();
+    }
+
+    private Review getReview(Long id) {
+        return reviewRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "리뷰를 찾을 수 없습니다."));
     }
 }

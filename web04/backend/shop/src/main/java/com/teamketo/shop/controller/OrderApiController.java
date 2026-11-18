@@ -2,11 +2,13 @@ package com.teamketo.shop.controller;
 
 import com.teamketo.shop.dto.OrderResponseDto;
 import com.teamketo.shop.entity.OrderStatus;
+import com.teamketo.shop.service.MemberService;
 import com.teamketo.shop.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,11 +19,12 @@ import java.util.stream.Collectors;
 public class OrderApiController {
 
     private final OrderService orderService;
+    private final MemberService memberService;
 
     // 주문 생성 (일반회원)
     @PostMapping
-    public ResponseEntity<OrderResponseDto> createOrder(@RequestBody Map<String, Object> body) {
-        Long memberId = Long.valueOf(body.get("memberId").toString());
+    public ResponseEntity<OrderResponseDto> createOrder(@RequestBody Map<String, Object> body, Principal principal) {
+        Long memberId = memberService.requireCurrentMember(principal.getName()).getId();
         List<Long> productIds = ((List<?>) body.get("productIds"))
                 .stream().map(id -> Long.valueOf(id.toString())).toList();
         List<Integer> quantities = ((List<?>) body.get("quantities"))
@@ -37,22 +40,24 @@ public class OrderApiController {
 
     // 내 주문 목록 (일반회원)
     @GetMapping("/my/{memberId}")
-    public ResponseEntity<List<OrderResponseDto>> getMyOrders(@PathVariable Long memberId) {
-        return ResponseEntity.ok(orderService.getMyOrders(memberId).stream()
+    public ResponseEntity<List<OrderResponseDto>> getMyOrders(@PathVariable Long memberId, Principal principal) {
+        Long currentMemberId = memberService.requireOwnMember(principal.getName(), memberId).getId();
+        return ResponseEntity.ok(orderService.getMyOrders(currentMemberId).stream()
                 .map(OrderResponseDto::new)
                 .collect(Collectors.toList()));
     }
 
     // 주문 상세 (일반회원)
     @GetMapping("/{orderId}")
-    public ResponseEntity<OrderResponseDto> getOrder(@PathVariable Long orderId) {
-        return ResponseEntity.ok(new OrderResponseDto(orderService.getOrder(orderId)));
+    public ResponseEntity<OrderResponseDto> getOrder(@PathVariable Long orderId, Principal principal) {
+        Long memberId = memberService.requireCurrentMember(principal.getName()).getId();
+        return ResponseEntity.ok(new OrderResponseDto(orderService.getOrder(orderId, memberId)));
     }
 
     // 주문 취소 (일반회원)
     @PutMapping("/{orderId}/cancel")
-    public ResponseEntity<Void> cancelOrder(@PathVariable Long orderId,
-                                            @RequestParam Long memberId) {
+    public ResponseEntity<Void> cancelOrder(@PathVariable Long orderId, Principal principal) {
+        Long memberId = memberService.requireCurrentMember(principal.getName()).getId();
         orderService.cancelOrder(orderId, memberId);
         return ResponseEntity.ok().build();
     }

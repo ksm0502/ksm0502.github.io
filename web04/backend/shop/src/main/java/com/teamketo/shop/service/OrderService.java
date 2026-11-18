@@ -5,8 +5,10 @@ import com.teamketo.shop.repository.MemberRepository;
 import com.teamketo.shop.repository.OrderRepository;
 import com.teamketo.shop.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -75,21 +77,15 @@ public class OrderService {
     }
 
     // 주문 상세 조회
-    public Order getOrder(Long orderId) {
-        return orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("주문을 찾을 수 없습니다."));
+    public Order getOrder(Long orderId, Long memberId) {
+        return orderRepository.findByIdAndMemberId(orderId, memberId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "주문을 찾을 수 없습니다."));
     }
 
     // 주문 취소
     @Transactional
     public void cancelOrder(Long orderId, Long memberId) {
-        Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("주문을 찾을 수 없습니다."));
-
-        // 본인 주문인지 확인
-        if (!order.getMember().getId().equals(memberId)) {
-            throw new RuntimeException("취소 권한이 없습니다.");
-        }
+        Order order = getOrder(orderId, memberId);
 
         // 배송중/배송완료는 취소 불가
         if (order.getStatus() == OrderStatus.SHIPPING ||

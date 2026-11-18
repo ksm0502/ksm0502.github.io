@@ -5,6 +5,7 @@ import com.teamketo.shop.entity.Member;
 import com.teamketo.shop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -21,7 +22,7 @@ public class MemberApiController {
         if (principal == null) {
             return ResponseEntity.status(401).build();
         }
-        return ResponseEntity.ok(new MemberResponseDto(memberService.findByEmail(principal.getName())));
+        return ResponseEntity.ok(new MemberResponseDto(memberService.requireCurrentMember(principal.getName())));
     }
 
     // 회원 가입
@@ -32,36 +33,39 @@ public class MemberApiController {
 
     // 내 정보 조회
     @GetMapping("/{email}")
-    public ResponseEntity<MemberResponseDto> getMember(@PathVariable String email) {
-        return ResponseEntity.ok(new MemberResponseDto(memberService.findByEmail(email)));
+    public ResponseEntity<MemberResponseDto> getMember(@PathVariable String email, Principal principal) {
+        if (principal == null) {
+            return ResponseEntity.status(401).build();
+        }
+        if (!principal.getName().equals(email)) {
+            throw new AccessDeniedException("본인 회원 정보만 조회할 수 있습니다.");
+        }
+        return ResponseEntity.ok(new MemberResponseDto(memberService.requireCurrentMember(principal.getName())));
     }
 
     // 회원 정보 수정
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateMember(@PathVariable Long id, @RequestBody Member memberData) {
-        Member existingMember = memberService.findAll().stream()
-                .filter(m -> m.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("회원을 찾을 수 없습니다."));
-        memberService.updateMember(existingMember.getEmail(), memberData.getName(), memberData.getPhone(), memberData.getAddress());
+    public ResponseEntity<Void> updateMember(@PathVariable Long id, @RequestBody Member memberData,
+                                             Principal principal) {
+        Member currentMember = memberService.requireOwnMember(principal.getName(), id);
+        memberService.updateMember(currentMember.getEmail(), memberData.getName(), memberData.getPhone(), memberData.getAddress());
         return ResponseEntity.ok().build();
     }
 
     // 비밀번호 변경
     @PutMapping("/{id}/password")
-    public ResponseEntity<Void> changePassword(@PathVariable Long id, @RequestParam String password) {
-        Member existingMember = memberService.findAll().stream()
-                .filter(m -> m.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("회원을 찾을 수 없습니다."));
-        memberService.changePassword(existingMember.getEmail(), password);
+    public ResponseEntity<Void> changePassword(@PathVariable Long id, @RequestParam String password,
+                                               Principal principal) {
+        Member currentMember = memberService.requireOwnMember(principal.getName(), id);
+        memberService.changePassword(currentMember.getEmail(), password);
         return ResponseEntity.ok().build();
     }
 
     // 회원 탈퇴
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMember(@PathVariable Long id) {
-        memberService.deleteMember(id);
+    public ResponseEntity<Void> deleteMember(@PathVariable Long id, Principal principal) {
+        Member currentMember = memberService.requireOwnMember(principal.getName(), id);
+        memberService.deleteMember(currentMember.getId());
         return ResponseEntity.ok().build();
     }
 }

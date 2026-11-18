@@ -3,7 +3,11 @@ package com.teamketo.shop.service;
 import com.teamketo.shop.entity.Qna;
 import com.teamketo.shop.repository.QnaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -14,18 +18,16 @@ public class QnaService {
     private final QnaRepository qnaRepository;
 
     // 질문 등록
-    public Qna createQuestion(Qna qna) {
-        qna.setLevel(1);
-        Qna q = qnaRepository.save(qna);
-        q.setParentId(q.getId());
-        return qnaRepository.save(q);
+    @Transactional
+    public Qna createQuestion(Qna qna, String writer) {
+        Qna question = qnaRepository.save(newPost(qna, writer, 1, null));
+        question.setParentId(question.getId());
+        return question;
     }
 
     // 답변 등록
-    public Qna createAnswer(Long parentId, Qna qna) {
-        qna.setLevel(2);
-        qna.setParentId(parentId);
-        return qnaRepository.save(qna);
+    public Qna createAnswer(Long parentId, Qna qna, String writer) {
+        return qnaRepository.save(newPost(qna, writer, 2, parentId));
     }
 
     // 전체 Q&A 목록 (게시판용)
@@ -53,10 +55,7 @@ public class QnaService {
 
     // 질문/답변 수정
     public Qna update(Long id, Qna qna, String loginUser, boolean isAdmin) {
-        Qna origin = qnaRepository.findById(id).orElseThrow();
-        if (!origin.getWriter().equals(loginUser) && !isAdmin) {
-            throw new RuntimeException("수정 권한 없음");
-        }
+        Qna origin = getEditablePost(id, loginUser, isAdmin);
         origin.setTitle(qna.getTitle());
         origin.setContent(qna.getContent());
         return qnaRepository.save(origin);
@@ -64,15 +63,32 @@ public class QnaService {
 
     // 삭제: 질문 삭제 시 답변도 삭제
     public void delete(Long id, String loginUser, boolean isAdmin) {
-        Qna origin = qnaRepository.findById(id).orElseThrow();
-        if (!origin.getWriter().equals(loginUser) && !isAdmin) {
-            throw new RuntimeException("삭제 권한 없음");
-        }
+        Qna origin = getEditablePost(id, loginUser, isAdmin);
         if (origin.getLevel() == 1) {
             List<Qna> list = qnaRepository.findByParentIdOrderByLevelAscCreatedAtAsc(origin.getId());
             qnaRepository.deleteAll(list);
         } else {
             qnaRepository.deleteById(id);
         }
+    }
+
+    private Qna newPost(Qna content, String writer, int level, Long parentId) {
+        return Qna.builder()
+                .title(content.getTitle())
+                .content(content.getContent())
+                .productId(content.getProductId())
+                .writer(writer)
+                .level(level)
+                .parentId(parentId)
+                .build();
+    }
+
+    private Qna getEditablePost(Long id, String loginUser, boolean isAdmin) {
+        Qna post = qnaRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Q&A 게시글을 찾을 수 없습니다."));
+        if (!isAdmin && !loginUser.equals(post.getWriter())) {
+            throw new AccessDeniedException("Q&A 작성자 또는 관리자만 변경할 수 있습니다.");
+        }
+        return post;
     }
 }
