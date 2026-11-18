@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.not;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -71,17 +72,20 @@ class ContentOwnershipTests {
         String reviewBody = """
                 {"memberId":%d,"productId":%d,"rating":5,"content":"Original review"}
                 """;
-        mockMvc.perform(post("/api/reviews").with(otherSession)
+        mockMvc.perform(post("/api/reviews").with(csrf()).with(otherSession)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(reviewBody.formatted(author.getId(), product.getId())))
                 .andExpect(status().isForbidden());
-        mockMvc.perform(post("/api/reviews").with(authorSession).contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(post("/api/reviews").with(csrf()).with(authorSession).contentType(MediaType.APPLICATION_JSON)
                         .content(reviewBody.formatted(otherCustomer.getId(), product.getId())))
                 .andExpect(status().isOk()).andExpect(jsonPath("$.member.id").value(author.getId().intValue()));
 
         Long reviewId = reviewRepository.findByMemberIdOrderByCreatedAtDesc(author.getId()).getFirst().getId();
         mockMvc.perform(get("/api/reviews/product/{id}", product.getId()))
-                .andExpect(status().isOk()).andExpect(jsonPath("$[0].content").value("Original review"));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].content").value("Original review"))
+                .andExpect(jsonPath("$[0].member.name").value(author.getName()))
+                .andExpect(jsonPath("$[0].member.length()").value(1));
         mockMvc.perform(get("/api/reviews/my/{id}", author.getId()).with(otherSession))
                 .andExpect(status().isForbidden());
         mockMvc.perform(get("/api/reviews/my/{id}", author.getId()).with(authorSession))
@@ -90,36 +94,51 @@ class ContentOwnershipTests {
         String update = """
                 {"memberId":%d,"rating":4,"content":"Updated review"}
                 """.formatted(author.getId());
-        mockMvc.perform(put("/api/reviews/{id}", reviewId).with(otherSession)
+        mockMvc.perform(put("/api/reviews/{id}", reviewId).with(csrf()).with(otherSession)
                         .contentType(MediaType.APPLICATION_JSON).content(update))
                 .andExpect(status().isForbidden());
-        mockMvc.perform(delete("/api/reviews/{id}", reviewId).with(otherSession)
+        mockMvc.perform(delete("/api/reviews/{id}", reviewId).with(csrf()).with(otherSession)
                         .param("memberId", author.getId().toString()).param("isAdmin", "true"))
                 .andExpect(status().isForbidden());
         assertThat(reviewRepository.findById(reviewId).orElseThrow().getContent()).isEqualTo("Original review");
 
-        mockMvc.perform(put("/api/reviews/{id}", reviewId).with(authorSession)
+        mockMvc.perform(put("/api/reviews/{id}", reviewId).with(csrf()).with(authorSession)
                         .contentType(MediaType.APPLICATION_JSON).content(update))
                 .andExpect(status().isOk()).andExpect(jsonPath("$.rating").value(4));
-        mockMvc.perform(delete("/api/reviews/{id}", reviewId).with(authorSession))
+        mockMvc.perform(delete("/api/reviews/{id}", reviewId).with(csrf()).with(authorSession))
                 .andExpect(status().isOk());
         assertThat(reviewRepository.findById(reviewId)).isEmpty();
 
-        mockMvc.perform(post("/api/reviews").with(authorSession)
+        mockMvc.perform(post("/api/reviews").with(csrf()).with(authorSession)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(reviewBody.formatted(author.getId(), product.getId())))
                 .andExpect(status().isOk());
         Long moderatedId = reviewRepository.findByMemberIdOrderByCreatedAtDesc(author.getId()).getFirst().getId();
-        mockMvc.perform(delete("/api/reviews/{id}", moderatedId).with(adminSession))
+        mockMvc.perform(delete("/api/reviews/{id}", moderatedId).with(csrf()).with(adminSession))
                 .andExpect(status().isOk());
         assertThat(reviewRepository.findById(moderatedId)).isEmpty();
+    }
+
+    @Test
+    void adminMemberResponsesExcludePasswordHashes() throws Exception {
+        createMember(Role.MANAGER);
+        for (String endpoint : List.of("/admin/members", "/admin/users", "/admin/managers")) {
+            mockMvc.perform(get(endpoint).with(adminSession))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$[0].email").isString())
+                    .andExpect(jsonPath("$..password").isEmpty());
+        }
+        mockMvc.perform(get("/admin/member/{email}", author.getEmail()).with(adminSession))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value(author.getEmail()))
+                .andExpect(jsonPath("$.password").doesNotExist());
     }
 
     @Test
     void qnaUsesSessionWriterAndPreservesAuthorAndAdminActions() throws Exception {
         Qna question = qnaService.createQuestion(Qna.builder().title("Original question").content("Question").build(),
                 author.getEmail());
-        mockMvc.perform(post("/api/qna/question").with(otherSession).contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(post("/api/qna/question").with(csrf()).with(otherSession).contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {"id":%d,"title":"New question","content":"New content","writer":"%s"}
                                 """.formatted(question.getId(), author.getEmail())))
@@ -128,33 +147,33 @@ class ContentOwnershipTests {
                 .andExpect(jsonPath("$.writer").value(otherCustomer.getEmail()));
 
         String update = "{\"title\":\"Updated question\",\"content\":\"Edited content\"}";
-        mockMvc.perform(put("/api/qna/update/{id}", question.getId()).with(otherSession)
+        mockMvc.perform(put("/api/qna/update/{id}", question.getId()).with(csrf()).with(otherSession)
                         .param("loginUser", author.getEmail()).param("isAdmin", "true")
                         .contentType(MediaType.APPLICATION_JSON).content(update))
                 .andExpect(status().isForbidden());
-        mockMvc.perform(delete("/api/qna/delete/{id}", question.getId()).with(otherSession)
+        mockMvc.perform(delete("/api/qna/delete/{id}", question.getId()).with(csrf()).with(otherSession)
                         .param("loginUser", author.getEmail()).param("isAdmin", "true"))
                 .andExpect(status().isForbidden());
         assertThat(qnaRepository.findById(question.getId()).orElseThrow().getTitle()).isEqualTo("Original question");
-        mockMvc.perform(put("/api/qna/update/{id}", question.getId()).with(authorSession)
+        mockMvc.perform(put("/api/qna/update/{id}", question.getId()).with(csrf()).with(authorSession)
                         .contentType(MediaType.APPLICATION_JSON).content(update))
                 .andExpect(status().isOk()).andExpect(jsonPath("$.title").value("Updated question"));
 
         String answer = """
                 {"title":"Answer","content":"Answer content","writer":"%s"}
                 """.formatted(author.getEmail());
-        mockMvc.perform(post("/api/qna/answer/{id}", question.getId()).with(otherSession)
+        mockMvc.perform(post("/api/qna/answer/{id}", question.getId()).with(csrf()).with(otherSession)
                         .contentType(MediaType.APPLICATION_JSON).content(answer))
                 .andExpect(status().isForbidden());
-        mockMvc.perform(post("/api/qna/answer/{id}", question.getId()).with(adminSession)
+        mockMvc.perform(post("/api/qna/answer/{id}", question.getId()).with(csrf()).with(adminSession)
                         .contentType(MediaType.APPLICATION_JSON).content(answer))
                 .andExpect(status().isOk()).andExpect(jsonPath("$.writer").value(admin.getEmail()));
         mockMvc.perform(get("/api/qna/detail/{id}", question.getId()))
                 .andExpect(status().isOk()).andExpect(jsonPath("$[1].title").value("Answer"));
-        mockMvc.perform(put("/api/qna/update/{id}", question.getId()).with(adminSession)
+        mockMvc.perform(put("/api/qna/update/{id}", question.getId()).with(csrf()).with(adminSession)
                         .contentType(MediaType.APPLICATION_JSON).content(update))
                 .andExpect(status().isOk());
-        mockMvc.perform(delete("/api/qna/delete/{id}", question.getId()).with(adminSession))
+        mockMvc.perform(delete("/api/qna/delete/{id}", question.getId()).with(csrf()).with(adminSession))
                 .andExpect(status().isOk());
         assertThat(qnaRepository.findByParentIdOrderByLevelAscCreatedAtAsc(question.getId())).isEmpty();
     }

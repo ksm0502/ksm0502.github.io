@@ -1,5 +1,6 @@
 package com.teamketo.shop.service;
 
+import com.teamketo.shop.dto.PublicReviewResponse;
 import com.teamketo.shop.entity.Member;
 import com.teamketo.shop.entity.Product;
 import com.teamketo.shop.entity.Review;
@@ -56,8 +57,11 @@ public class ReviewService {
     }
 
     // 특정 상품 리뷰 목록
-    public List<Review> getReviewsByProduct(Long productId) {
-        return reviewRepository.findByProductIdOrderByCreatedAtDesc(productId);
+    @Transactional(readOnly = true)
+    public List<PublicReviewResponse> getReviewsByProduct(Long productId) {
+        return reviewRepository.findByProductIdOrderByCreatedAtDesc(productId).stream()
+                .map(PublicReviewResponse::new)
+                .toList();
     }
 
     // 내 리뷰 목록 (마이페이지)

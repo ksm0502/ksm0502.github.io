@@ -26,7 +26,6 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .cors(cors -> {})
-                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         // 관리자 API는 상품·주문·리뷰의 공통 경로보다 먼저 검사
                         .requestMatchers(
@@ -39,6 +38,8 @@ public class SecurityConfig {
                         .hasRole("ADMIN")
                         //모든 사용자 접근 가능
                         .requestMatchers(HttpMethod.GET, "/api/products/**")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/csrf")
                         .permitAll()
                         .requestMatchers(
                                 "/", "/signup", "/login",

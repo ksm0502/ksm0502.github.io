@@ -1,5 +1,6 @@
 package com.teamketo.shop.controller;
 
+import com.teamketo.shop.dto.PublicReviewResponse;
 import com.teamketo.shop.entity.Review;
 import com.teamketo.shop.service.MemberService;
 import com.teamketo.shop.service.ReviewService;
@@ -32,7 +33,7 @@ public class ReviewApiController {
 
     // 특정 상품 리뷰 목록
     @GetMapping("/product/{productId}")
-    public ResponseEntity<List<Review>> getReviewsByProduct(@PathVariable Long productId) {
+    public ResponseEntity<List<PublicReviewResponse>> getReviewsByProduct(@PathVariable Long productId) {
         return ResponseEntity.ok(reviewService.getReviewsByProduct(productId));
     }
 

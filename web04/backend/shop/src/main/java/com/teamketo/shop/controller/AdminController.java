@@ -1,6 +1,6 @@
 package com.teamketo.shop.controller;
 
-import com.teamketo.shop.entity.Member;
+import com.teamketo.shop.dto.MemberResponseDto;
 import com.teamketo.shop.entity.Role;
 import com.teamketo.shop.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -18,20 +18,20 @@ public class AdminController {
     private final MemberService memberService;
     //전체 회원 조회
     @GetMapping("/members")
-    public ResponseEntity<List<Member>> getAllMember() {
-        return ResponseEntity.ok(memberService.findAll());
+    public ResponseEntity<List<MemberResponseDto>> getAllMember() {
+        return ResponseEntity.ok(memberService.findAll().stream().map(MemberResponseDto::new).toList());
     }
 
     //일반 회원 조회
     @GetMapping("/users")
-    public ResponseEntity<List<Member>> getUsers() {
-        return ResponseEntity.ok(memberService.findByRole(Role.USER));
+    public ResponseEntity<List<MemberResponseDto>> getUsers() {
+        return ResponseEntity.ok(memberService.findByRole(Role.USER).stream().map(MemberResponseDto::new).toList());
     }
 
     //매니저 조회
     @GetMapping("/managers")
-    public ResponseEntity<List<Member>> getManagers() {
-        return ResponseEntity.ok(memberService.findByRole(Role.MANAGER));
+    public ResponseEntity<List<MemberResponseDto>> getManagers() {
+        return ResponseEntity.ok(memberService.findByRole(Role.MANAGER).stream().map(MemberResponseDto::new).toList());
     }
 
     //권한 변경
@@ -50,7 +50,7 @@ public class AdminController {
 
     //특정 회원 정보 조회
     @GetMapping("/member/{email}")
-    public ResponseEntity<Member> getMemberDetail(@PathVariable String email) {
-        return ResponseEntity.ok(memberService.findByEmail(email));
+    public ResponseEntity<MemberResponseDto> getMemberDetail(@PathVariable String email) {
+        return ResponseEntity.ok(new MemberResponseDto(memberService.findByEmail(email)));
     }
 }

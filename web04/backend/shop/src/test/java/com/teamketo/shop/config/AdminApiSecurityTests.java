@@ -27,6 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -57,15 +58,15 @@ class AdminApiSecurityTests {
     @MethodSource("adminRequests")
     void adminApiRequiresAdminRole(String endpoint, Supplier<MockHttpServletRequestBuilder> request)
             throws Exception {
-        mockMvc.perform(request.get())
+        mockMvc.perform(request.get().with(csrf()))
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrl("http://localhost/login"));
 
-        mockMvc.perform(request.get().with(user("customer").roles("USER")))
+        mockMvc.perform(request.get().with(csrf()).with(user("customer").roles("USER")))
                 .andExpect(status().isForbidden());
-        mockMvc.perform(request.get().with(user("manager").roles("MANAGER")))
+        mockMvc.perform(request.get().with(csrf()).with(user("manager").roles("MANAGER")))
                 .andExpect(status().isForbidden());
-        mockMvc.perform(request.get().with(user("admin").roles("ADMIN")))
+        mockMvc.perform(request.get().with(csrf()).with(user("admin").roles("ADMIN")))
                 .andExpect(status().isOk());
     }
 

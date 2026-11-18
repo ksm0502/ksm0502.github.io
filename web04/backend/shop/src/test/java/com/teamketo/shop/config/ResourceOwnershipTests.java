@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -63,13 +64,13 @@ class ResourceOwnershipTests {
 
         mockMvc.perform(get("/{email}", otherCustomer.getEmail()).with(customerSession))
                 .andExpect(status().isForbidden());
-        mockMvc.perform(put("/{id}", otherCustomer.getId()).with(customerSession)
+        mockMvc.perform(put("/{id}", otherCustomer.getId()).with(csrf()).with(customerSession)
                         .contentType(MediaType.APPLICATION_JSON).content(update))
                 .andExpect(status().isForbidden());
-        mockMvc.perform(put("/{id}/password", otherCustomer.getId()).with(customerSession)
+        mockMvc.perform(put("/{id}/password", otherCustomer.getId()).with(csrf()).with(customerSession)
                         .param("password", "updated-test-password"))
                 .andExpect(status().isForbidden());
-        mockMvc.perform(delete("/{id}", otherCustomer.getId()).with(customerSession))
+        mockMvc.perform(delete("/{id}", otherCustomer.getId()).with(csrf()).with(customerSession))
                 .andExpect(status().isForbidden());
         Member unchanged = memberRepository.findById(otherCustomer.getId()).orElseThrow();
         assertThat(unchanged.getName()).isEqualTo("Other customer");
@@ -77,16 +78,16 @@ class ResourceOwnershipTests {
 
         mockMvc.perform(get("/{email}", customer.getEmail()).with(customerSession))
                 .andExpect(status().isOk()).andExpect(jsonPath("$.email").value(customer.getEmail()));
-        mockMvc.perform(put("/{id}", customer.getId()).with(customerSession)
+        mockMvc.perform(put("/{id}", customer.getId()).with(csrf()).with(customerSession)
                         .contentType(MediaType.APPLICATION_JSON).content(update))
                 .andExpect(status().isOk());
-        mockMvc.perform(put("/{id}/password", customer.getId()).with(customerSession)
+        mockMvc.perform(put("/{id}/password", customer.getId()).with(csrf()).with(customerSession)
                         .param("password", "updated-test-password"))
                 .andExpect(status().isOk());
         Member updated = memberRepository.findById(customer.getId()).orElseThrow();
         assertThat(updated.getName()).isEqualTo("Updated customer");
         assertThat(passwordEncoder.matches("updated-test-password", updated.getPassword())).isTrue();
-        mockMvc.perform(delete("/{id}", customer.getId()).with(customerSession))
+        mockMvc.perform(delete("/{id}", customer.getId()).with(csrf()).with(customerSession))
                 .andExpect(status().isOk());
         assertThat(memberRepository.findById(customer.getId())).isEmpty();
     }
@@ -101,14 +102,14 @@ class ResourceOwnershipTests {
                 .andExpect(status().isForbidden());
         mockMvc.perform(get("/api/orders/{id}", otherOrder.getId()).with(customerSession))
                 .andExpect(status().isNotFound());
-        mockMvc.perform(put("/api/orders/{id}/cancel", otherOrder.getId()).with(customerSession)
+        mockMvc.perform(put("/api/orders/{id}/cancel", otherOrder.getId()).with(csrf()).with(customerSession)
                         .param("memberId", otherCustomer.getId().toString()))
                 .andExpect(status().isNotFound());
         assertThat(orderRepository.findById(otherOrder.getId()).orElseThrow().getStatus())
                 .isEqualTo(OrderStatus.ORDER_COMPLETE);
         assertThat(productRepository.findById(product.getId()).orElseThrow().getStock()).isEqualTo(9);
 
-        mockMvc.perform(post("/api/orders").with(customerSession).contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(post("/api/orders").with(csrf()).with(customerSession).contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {"memberId":%d,"productIds":[%d],"quantities":[2],
                                 "deliveryAddress":"QA address","deliveryReceiver":"Customer",
@@ -120,7 +121,7 @@ class ResourceOwnershipTests {
                 .andExpect(status().isOk()).andExpect(jsonPath("$[0].id").value(ownOrder.getId().intValue()));
         mockMvc.perform(get("/api/orders/{id}", ownOrder.getId()).with(customerSession))
                 .andExpect(status().isOk());
-        mockMvc.perform(put("/api/orders/{id}/cancel", ownOrder.getId()).with(customerSession)
+        mockMvc.perform(put("/api/orders/{id}/cancel", ownOrder.getId()).with(csrf()).with(customerSession)
                         .param("memberId", customer.getId().toString()))
                 .andExpect(status().isOk());
         assertThat(orderRepository.findById(ownOrder.getId()).orElseThrow().getStatus())
@@ -135,14 +136,14 @@ class ResourceOwnershipTests {
 
         mockMvc.perform(get("/api/cart/{id}", otherCustomer.getId()).with(customerSession))
                 .andExpect(status().isForbidden());
-        mockMvc.perform(delete("/api/cart/clear/{id}", otherCustomer.getId()).with(customerSession))
+        mockMvc.perform(delete("/api/cart/clear/{id}", otherCustomer.getId()).with(csrf()).with(customerSession))
                 .andExpect(status().isForbidden());
-        mockMvc.perform(put("/api/cart/{id}", otherItem.getId()).with(customerSession).param("quantity", "2"))
+        mockMvc.perform(put("/api/cart/{id}", otherItem.getId()).with(csrf()).with(customerSession).param("quantity", "2"))
                 .andExpect(status().isNotFound());
-        mockMvc.perform(delete("/api/cart/{id}", otherItem.getId()).with(customerSession))
+        mockMvc.perform(delete("/api/cart/{id}", otherItem.getId()).with(csrf()).with(customerSession))
                 .andExpect(status().isNotFound());
 
-        mockMvc.perform(post("/api/cart").with(customerSession).contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(post("/api/cart").with(csrf()).with(customerSession).contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {"memberId":%d,"productId":%d,"quantity":2}
                                 """.formatted(otherCustomer.getId(), product.getId())))
@@ -150,14 +151,14 @@ class ResourceOwnershipTests {
         var ownItem = cartItemRepository.findByMemberIdAndProductId(customer.getId(), product.getId()).orElseThrow();
         mockMvc.perform(get("/api/cart/{id}", customer.getId()).with(customerSession))
                 .andExpect(status().isOk()).andExpect(jsonPath("$[0].quantity").value(2));
-        mockMvc.perform(put("/api/cart/{id}", ownItem.getId()).with(customerSession).param("quantity", "3"))
+        mockMvc.perform(put("/api/cart/{id}", ownItem.getId()).with(csrf()).with(customerSession).param("quantity", "3"))
                 .andExpect(status().isOk()).andExpect(jsonPath("$.quantity").value(3));
-        mockMvc.perform(delete("/api/cart/{id}", ownItem.getId()).with(customerSession))
+        mockMvc.perform(delete("/api/cart/{id}", ownItem.getId()).with(csrf()).with(customerSession))
                 .andExpect(status().isOk());
         assertThat(cartItemRepository.findByMemberId(customer.getId())).isEmpty();
 
         cartService.addToCart(customer.getId(), product.getId(), 1);
-        mockMvc.perform(delete("/api/cart/clear/{id}", customer.getId()).with(customerSession))
+        mockMvc.perform(delete("/api/cart/clear/{id}", customer.getId()).with(csrf()).with(customerSession))
                 .andExpect(status().isOk());
         assertThat(cartItemRepository.findByMemberId(customer.getId())).isEmpty();
         assertThat(cartItemRepository.findById(otherItem.getId()).orElseThrow().getQuantity()).isEqualTo(1);
