@@ -28,6 +28,7 @@ public class OrderService {
                              String deliveryReceiver,
                              String deliveryPhone) {
 
+        validateOrderItems(productIds, quantities);
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new RuntimeException("회원을 찾을 수 없습니다."));
 
@@ -39,17 +40,22 @@ public class OrderService {
                 .totalPrice(0)
                 .build();
 
-        int totalPrice = 0;
+        long totalPrice = 0;
 
         for (int i = 0; i < productIds.size(); i++) {
             Product product = productRepository.findById(productIds.get(i))
-                    .orElseThrow(() -> new RuntimeException("상품을 찾을 수 없습니다."));
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "상품을 찾을 수 없습니다."));
 
             int qty = quantities.get(i);
 
             // 재고 확인
             if (product.getStock() == null || product.getStock() < qty) {
-                throw new RuntimeException("재고가 부족합니다: " + product.getName());
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "재고가 부족합니다: " + product.getName());
+            }
+
+            totalPrice += (long) product.getPrice() * qty;
+            if (totalPrice > Integer.MAX_VALUE || totalPrice < Integer.MIN_VALUE) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "주문 금액이 허용 범위를 벗어났습니다.");
             }
 
             // 재고 차감
@@ -64,11 +70,20 @@ public class OrderService {
                     .build();
 
             order.getOrderItems().add(item);
-            totalPrice += product.getPrice() * qty;
         }
 
-        order.setTotalPrice(totalPrice);
+        order.setTotalPrice((int) totalPrice);
         return orderRepository.save(order);
+    }
+
+    private static void validateOrderItems(List<Long> productIds, List<Integer> quantities) {
+        if (productIds == null || quantities == null || productIds.isEmpty() || productIds.size() != quantities.size()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "상품과 수량을 같은 개수로 한 항목 이상 입력해 주세요.");
+        }
+        if (productIds.stream().anyMatch(id -> id == null || id <= 0)
+                || quantities.stream().anyMatch(quantity -> quantity == null || quantity <= 0)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "상품 ID와 수량은 양의 정수여야 합니다.");
+        }
     }
 
     // 내 주문 목록 조회
