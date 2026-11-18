@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,10 +44,14 @@ public class OrderService {
                 .build();
 
         long totalPrice = 0;
+        // 여러 상품을 구매해도 각 거래가 상품 ID 순서로 잠금을 획득한다.
+        Map<Long, Product> products = indexProducts(productRepository.findForStockUpdate(productIds));
 
         for (int i = 0; i < productIds.size(); i++) {
-            Product product = productRepository.findById(productIds.get(i))
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "상품을 찾을 수 없습니다."));
+            Product product = products.get(productIds.get(i));
+            if (product == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "상품을 찾을 수 없습니다.");
+            }
 
             int qty = quantities.get(i);
 
@@ -60,7 +67,6 @@ public class OrderService {
 
             // 재고 차감
             product.setStock(product.getStock() - qty);
-            productRepository.save(product);
 
             OrderItem item = OrderItem.builder()
                     .order(order)
@@ -94,31 +100,39 @@ public class OrderService {
     // 주문 상세 조회
     public Order getOrder(Long orderId, Long memberId) {
         return orderRepository.findByIdAndMemberId(orderId, memberId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "주문을 찾을 수 없습니다."));
+                .orElseThrow(OrderService::orderNotFound);
     }
 
     // 주문 취소
     @Transactional
     public void cancelOrder(Long orderId, Long memberId) {
-        Order order = getOrder(orderId, memberId);
+        Order order = orderRepository.findByIdAndMemberIdForUpdate(orderId, memberId)
+                .orElseThrow(OrderService::orderNotFound);
+        cancelAndRestoreStock(order);
+    }
 
-        // 배송중/배송완료는 취소 불가
-        if (order.getStatus() == OrderStatus.SHIPPING ||
-                order.getStatus() == OrderStatus.DELIVERED) {
-            throw new RuntimeException("배송 중이거나 완료된 주문은 취소할 수 없습니다.");
+    private void cancelAndRestoreStock(Order order) {
+        if (order.getStatus() == OrderStatus.CANCELLED) {
+            return;
         }
 
-        // 재고 복구 (null 체크 추가)
+        if (order.getStatus() == OrderStatus.SHIPPING || order.getStatus() == OrderStatus.DELIVERED) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "배송 중이거나 완료된 주문은 취소할 수 없습니다.");
+        }
+
+        Map<Long, Product> products = indexProducts(productRepository.findForOrderStockUpdate(order.getId()));
         for (OrderItem item : order.getOrderItems()) {
-            Product product = item.getProduct();
+            Product product = products.get(item.getProduct().getId());
             if (product.getStock() != null) {
-                product.setStock(product.getStock() + item.getQuantity());
-                productRepository.save(product);
+                try {
+                    product.setStock(Math.addExact(product.getStock(), item.getQuantity()));
+                } catch (ArithmeticException ex) {
+                    throw new ResponseStatusException(HttpStatus.CONFLICT, "복구할 재고가 허용 범위를 벗어났습니다.");
+                }
             }
         }
 
         order.setStatus(OrderStatus.CANCELLED);
-        orderRepository.save(order);
     }
 
     // 전체 주문 목록 (관리자)
@@ -129,9 +143,23 @@ public class OrderService {
     // 주문 상태 변경 (관리자)
     @Transactional
     public void changeOrderStatus(Long orderId, OrderStatus status) {
-        Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("주문을 찾을 수 없습니다."));
+        Order order = orderRepository.findByIdForUpdate(orderId)
+                .orElseThrow(OrderService::orderNotFound);
+        if (status == OrderStatus.CANCELLED) {
+            cancelAndRestoreStock(order);
+            return;
+        }
+        if (order.getStatus() == OrderStatus.CANCELLED) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "취소된 주문은 상태를 변경할 수 없습니다.");
+        }
         order.setStatus(status);
-        orderRepository.save(order);
+    }
+
+    private static Map<Long, Product> indexProducts(List<Product> products) {
+        return products.stream().collect(Collectors.toMap(Product::getId, Function.identity()));
+    }
+
+    private static ResponseStatusException orderNotFound() {
+        return new ResponseStatusException(HttpStatus.NOT_FOUND, "주문을 찾을 수 없습니다.");
     }
 }
